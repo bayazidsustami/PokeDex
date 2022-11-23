@@ -1,0 +1,9 @@
+[versions]
+gradleplugin = "7.3.1"
+kotlin = "1.7.20"
+
+[plugins]
+android_application = { id = "com.android.application", version.ref = "gradleplugin" }
+android_library = { id = "com.android.library", version.ref = "gradleplugin" }
+kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

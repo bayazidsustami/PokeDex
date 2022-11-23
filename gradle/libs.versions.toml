@@ -1,9 +1,42 @@
 [versions]
 gradleplugin = "7.3.1"
 kotlin = "1.7.20"
+retrofit = "2.9.0"
+moshi = "2.4.0"
+interceptor = "4.9.0"
+room = "2.3.0"
+core-ktx = "1.9.0"
+appcompat = "1.5.1"
+material-design = "1.7.0"
+constraint-layout = "2.1.4"
+junit = "4.13.2"
+android-junit = "1.1.4"
+espresso-core = "3.5.0"
+
+[libraries]
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+moshi = { module = "om.squareup.retrofit2:converter-moshi", version.ref = "moshi" }
+interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "interceptor" }
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx"}
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"}
+material-design = { module = "com.google.android.material:material", version.ref = "material-design"}
+constraint-layout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraint-layout"}
+junit = { module = "junit:junit", version.ref="junit"}
+android-junit = { module = "androidx.test.ext:junit", version.ref = "android-junit" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+
+[bundles]
+squareup = ["retrofit", "moshi", "interceptor"]
+room = ["room-ktx", "room-runtime", "room-compiler"]
+standart = ["core-ktx", "appcompat", "material-design", "constraint-layout"]
+unittest = ["junit"]
+instrumentationtest = ["android-junit", "espresso-core"]
 
 [plugins]
-android_application = { id = "com.android.application", version.ref = "gradleplugin" }
-android_library = { id = "com.android.library", version.ref = "gradleplugin" }
-kotlin_android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-kotlin_kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+android-application = { id = "com.android.application", version.ref = "gradleplugin" }
+android-library = { id = "com.android.library", version.ref = "gradleplugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

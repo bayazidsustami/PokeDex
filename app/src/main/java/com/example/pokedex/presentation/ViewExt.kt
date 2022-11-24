@@ -19,6 +19,7 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
+
 val listPokeColors: List<Int>
     get() = listOf(
         R.color.type_grass,

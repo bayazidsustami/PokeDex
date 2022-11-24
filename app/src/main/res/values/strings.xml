@@ -22,4 +22,6 @@
     <string name="satk">SATK</string>
     <string name="sdef">SDEF</string>
     <string name="spd">SPD</string>
+    <string name="arrow_left">arrow_left</string>
+    <string name="arrow_right">arrow_right</string>
 </resources>

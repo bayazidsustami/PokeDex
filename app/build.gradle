@@ -48,6 +48,7 @@ dependencies {
 
     implementation libs.bundles.standart
     implementation libs.bundles.squareup
+    implementation libs.bundles.extensions
 
     implementation libs.hilt
     kapt libs.hilt.compiler

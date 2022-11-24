@@ -7,8 +7,7 @@ import com.example.pokedex.common.Constant
 
 @Entity(tableName = Constant.Values.POKEMON_TABLE)
 data class PokemonEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey
     @ColumnInfo(name = "poke_number")
     val pokeNumber: String,
     @ColumnInfo(name = "poke_name")

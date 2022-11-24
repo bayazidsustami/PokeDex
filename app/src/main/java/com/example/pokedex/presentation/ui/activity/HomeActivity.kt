@@ -3,6 +3,7 @@ package com.example.pokedex.presentation.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.data.datasource.remote.response.Pokemon
 import com.example.pokedex.databinding.ActivityHomeBinding
 import com.example.pokedex.presentation.UiEvent
@@ -33,7 +34,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         }
     }
 
-    private fun renderList(items: List<Pokemon>) {
+    private fun renderList(items: List<PokemonEntity>) {
         with(binding.rvListPoke) {
             adapter = this@HomeActivity.adapter
             layoutManager = GridLayoutManager(this@HomeActivity, 3)

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.pokedex.common.PokeSort
 import com.example.pokedex.common.Resource
 import com.example.pokedex.common.dispatchers.di.qulifiers.MainDispatcher
+import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.data.datasource.remote.response.Pokemon
 import com.example.pokedex.domain.PokemonHomeUseCase
 import com.example.pokedex.presentation.UiEvent
@@ -23,8 +24,8 @@ class HomeViewModel @Inject constructor(
     @MainDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _pokeList = MutableLiveData<UiEvent<List<Pokemon>>>()
-    val pokeList: LiveData<UiEvent<List<Pokemon>>> get() = _pokeList
+    private val _pokeList = MutableLiveData<UiEvent<List<PokemonEntity>>>()
+    val pokeList: LiveData<UiEvent<List<PokemonEntity>>> get() = _pokeList
 
     fun getPokemonList(name: String = "", sortBy: PokeSort = PokeSort.NUMBER) {
         viewModelScope.launch(dispatcher) {

@@ -49,11 +49,13 @@ dependencies {
     implementation libs.bundles.standart
     implementation libs.bundles.squareup
     implementation libs.bundles.extensions
+    implementation libs.bundles.room
 
     implementation libs.glide
 
     implementation libs.hilt
     kapt libs.hilt.compiler
+    kapt libs.room.compiler
 
     testImplementation libs.bundles.unittest
     androidTestImplementation libs.bundles.instrumentationtest

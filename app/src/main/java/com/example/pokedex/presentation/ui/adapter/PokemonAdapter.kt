@@ -3,14 +3,14 @@ package com.example.pokedex.presentation.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pokedex.data.datasource.remote.response.Pokemon
+import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.ViewPokemonItemBinding
 import com.example.pokedex.presentation.listPokeColors
 import com.example.pokedex.presentation.loadImage
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
-    private var items: List<Pokemon> = emptyList()
+    private var items: List<PokemonEntity> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ViewPokemonItemBinding.inflate(
@@ -25,7 +25,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = items.size
 
-    fun submitList(items: List<Pokemon>){
+    fun submitList(items: List<PokemonEntity>){
         this.items = items
         notifyDataSetChanged()
     }
@@ -34,13 +34,13 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
         private val binding: ViewPokemonItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Pokemon) {
+        fun bind(data: PokemonEntity) {
             val randIndex = (0..8).random()
             val color = listPokeColors[randIndex]
             with(binding) {
-                tvPokeNumber.text = data.getPokeNumber()
-                ivPokemon.loadImage(data.getImageUrl())
-                tvPokeName.text = data.name
+                tvPokeNumber.text = data.pokeNumber
+                ivPokemon.loadImage(data.imageUrl)
+                tvPokeName.text = data.pokeName
                 viewBackground.setBackgroundResource(color)
                 tvPokeNumber.setTextColor(color)
             }

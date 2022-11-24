@@ -34,7 +34,7 @@ class NetworkResource @Inject constructor() {
 
     inline fun <ResultType, RequestType> networkBoundResource(
         crossinline loadFromDb: () -> Flow<ResultType>,
-        crossinline createCall: () -> Flow<ApiResponse<RequestType>>,
+        crossinline createCall: suspend () -> Flow<ApiResponse<RequestType>>,
         crossinline shouldFetch: (ResultType?) -> Boolean = {true},
         crossinline saveCallResult : suspend (RequestType) -> Unit
     ): Flow<Resource<ResultType>> {

@@ -1,8 +1,8 @@
-package com.example.pokedex.ui.activity
+package com.example.pokedex.presentation.activity
 
 import android.os.Bundle
 import com.example.pokedex.databinding.ActivityHomeBinding
-import com.example.pokedex.ui.base.BaseActivity
+import com.example.pokedex.presentation.base.BaseActivity
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::inflate) {
 

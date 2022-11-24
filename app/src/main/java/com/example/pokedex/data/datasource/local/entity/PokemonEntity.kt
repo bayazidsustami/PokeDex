@@ -1,10 +1,13 @@
 package com.example.pokedex.data.datasource.local.entity
 
+import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.pokedex.common.Constant
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = Constant.Values.POKEMON_TABLE)
 data class PokemonEntity(
     @PrimaryKey
@@ -16,4 +19,4 @@ data class PokemonEntity(
     val url: String,
     @ColumnInfo(name = "image_url")
     val imageUrl: String,
-)
+): Parcelable

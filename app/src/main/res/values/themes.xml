@@ -20,5 +20,6 @@
     </style>
     <style name="TextAppearance.AppCompat.Bold" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/bold</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>

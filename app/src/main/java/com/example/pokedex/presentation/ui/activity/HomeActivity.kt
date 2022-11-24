@@ -1,5 +1,6 @@
 package com.example.pokedex.presentation.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +23,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
     private var sortBy: PokeSort? = null
     private var queryString: String? = null
+    private val listPoke: ArrayList<PokemonEntity>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,9 +68,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
             setHasFixedSize(true)
             addItemDecoration(SpaceItemDecoration(SPAN_COUNT, SPACING, false))
         }
+
+        adapter.setOnClickListener{ pos ->
+            Intent(this, DetailActivity::class.java).also {
+                it.putExtra(DetailActivity.EXTRA_POSITION, pos)
+            }.apply { startActivity(this) }
+        }
     }
 
     private fun renderList(items: List<PokemonEntity>) {
+        listPoke?.addAll(items)
         adapter.submitList(items)
     }
 

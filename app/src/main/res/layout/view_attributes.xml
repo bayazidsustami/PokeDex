@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="352dp"
+    android:layout_height="48dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="10sp"
+            android:textColor="@color/dark_gray"
+            app:drawableStartCompat="@drawable/ic_weight"
+            android:drawablePadding="8dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            tools:text="6.9kg"
+            tools:ignore="NestedWeights" />
+
+        <TextView
+            android:id="@+id/tv_weight_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/medium_gray"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="8sp"
+            android:text="@string/weight"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_height"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="10sp"
+            android:textColor="@color/dark_gray"
+            app:drawableStartCompat="@drawable/ic_height"
+            android:drawablePadding="8dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            tools:text="0.7m"
+            tools:ignore="NestedWeights" />
+
+        <TextView
+            android:id="@+id/tv_height_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/medium_gray"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="8sp"
+            android:text="@string/height"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_moves"
+            android:layout_width="57dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="10sp"
+            android:textColor="@color/dark_gray"
+            android:padding="1dp"
+            android:textAlignment="center"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            tools:text="Chrophyll Overgrow"
+            tools:ignore="NestedWeights" />
+
+        <TextView
+            android:id="@+id/tv_moves_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/medium_gray"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textSize="8sp"
+            android:text="@string/moves"/>
+    </LinearLayout>
+
+</LinearLayout>

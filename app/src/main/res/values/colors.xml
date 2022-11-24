@@ -10,6 +10,7 @@
     <color name="background">#F7F7F7</color>
     <color name="light_gray">#E0E0E0</color>
     <color name="dark_gray">#212121</color>
+    <color name="medium_gray">#666666</color>
     <color name="type_grass">#74CB48</color>
     <color name="type_fire">#F57D31</color>
     <color name="type_water">#6493EB</color>

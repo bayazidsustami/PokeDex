@@ -2,6 +2,7 @@ package com.example.pokedex.presentation.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.ViewPokemonItemBinding
@@ -12,6 +13,12 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     private var items: List<PokemonEntity> = emptyList()
 
+    private var clickListener: OnClickListener? = null
+
+    fun setOnClickListener(clickListener: OnClickListener) {
+        this.clickListener = clickListener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ViewPokemonItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -21,6 +28,10 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
+
+        holder.binding.root.setOnClickListener {
+            clickListener?.onClick(position)
+        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -32,7 +43,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     }
 
     inner class ViewHolder(
-        private val binding: ViewPokemonItemBinding
+        val binding: ViewPokemonItemBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: PokemonEntity) {
@@ -43,8 +54,13 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
                 ivPokemon.loadImage(data.imageUrl)
                 tvPokeName.text = data.pokeName
                 viewBackground.setBackgroundResource(color)
-                tvPokeNumber.setTextColor(color)
+                tvPokeNumber.setTextColor(ContextCompat.getColor(itemView.context, color))
+
             }
         }
+    }
+
+    fun interface OnClickListener {
+        fun onClick(position: Int)
     }
 }

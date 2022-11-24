@@ -1,5 +1,6 @@
 package com.example.pokedex.data.datasource.remote.response
 
+import com.example.pokedex.presentation.listPokeColors
 import com.google.gson.annotations.SerializedName
 
 data class Pokemon(
@@ -17,5 +18,10 @@ data class Pokemon(
     fun getPokeNumber(): String {
         val index = url.split("/".toRegex()).dropLast(1).last()
         return String.format("#%03d", index.toInt())
+    }
+
+    fun getRandomColorTypes(): String {
+        val randIndex = (0..8).random()
+        return listPokeColors[randIndex]
     }
 }

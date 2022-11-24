@@ -19,4 +19,6 @@ data class PokemonEntity(
     val url: String,
     @ColumnInfo(name = "image_url")
     val imageUrl: String,
+    @ColumnInfo(name = "color_types")
+    val colorTypes: String
 ): Parcelable

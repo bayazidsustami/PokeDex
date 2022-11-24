@@ -14,7 +14,8 @@ class Mapper @Inject constructor() {
                 pokeName = it.name,
                 url = it.url,
                 imageUrl = it.getImageUrl(),
-                pokeNumber = it.getPokeNumber()
+                pokeNumber = it.getPokeNumber(),
+                colorTypes = it.getRandomColorTypes()
             )
         }
     }

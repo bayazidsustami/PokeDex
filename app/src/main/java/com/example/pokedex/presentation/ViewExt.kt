@@ -19,16 +19,31 @@ fun View.visible() {
     visibility = View.VISIBLE
 }
 
+fun getColorRes(types: String) : Int {
+    return when(types) {
+        "type_grass" -> R.color.type_grass
+        "type_fire" -> R.color.type_fire
+        "type_water" -> R.color.type_water
+        "type_bug" -> R.color.type_bug
+        "type_electric" -> R.color.type_electric
+        "type_gosh" -> R.color.type_gosh
+        "type_normal" -> R.color.type_normal
+        "type_psychic" -> R.color.type_psychic
+        "type_steel"-> R.color.type_steel
+        else -> R.color.type_grass
+    }
+}
 
-val listPokeColors: List<Int>
+
+val listPokeColors: List<String>
     get() = listOf(
-        R.color.type_grass,
-        R.color.type_fire,
-        R.color.type_water,
-        R.color.type_bug,
-        R.color.type_electric,
-        R.color.type_gosh,
-        R.color.type_normal,
-        R.color.type_psychic,
-        R.color.type_steel,
+        "type_grass",
+        "type_fire",
+        "type_water",
+        "type_bug",
+        "type_electric",
+        "type_gosh",
+        "type_normal",
+        "type_psychic",
+        "type_steel",
     )

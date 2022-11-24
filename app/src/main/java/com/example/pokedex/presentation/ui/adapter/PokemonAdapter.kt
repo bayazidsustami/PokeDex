@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.ViewPokemonItemBinding
-import com.example.pokedex.presentation.listPokeColors
+import com.example.pokedex.presentation.getColorRes
 import com.example.pokedex.presentation.loadImage
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
@@ -47,14 +47,12 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: PokemonEntity) {
-            val randIndex = (0..8).random()
-            val color = listPokeColors[randIndex]
             with(binding) {
                 tvPokeNumber.text = data.pokeNumber
                 ivPokemon.loadImage(data.imageUrl)
                 tvPokeName.text = data.pokeName
-                viewBackground.setBackgroundResource(color)
-                tvPokeNumber.setTextColor(ContextCompat.getColor(itemView.context, color))
+                viewBackground.setBackgroundResource(getColorRes(data.colorTypes))
+                tvPokeNumber.setTextColor(ContextCompat.getColor(itemView.context, getColorRes(data.colorTypes)))
 
             }
         }

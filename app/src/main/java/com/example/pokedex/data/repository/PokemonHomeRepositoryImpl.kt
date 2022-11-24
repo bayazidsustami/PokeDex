@@ -22,7 +22,11 @@ class PokemonHomeRepositoryImpl @Inject constructor(
     ): Flow<Resource<List<PokemonEntity>>> {
         return resource.networkBoundResource(
             loadFromDb = {
-                localDataSource.getAllPokemon()
+                when(orderBy) {
+                    PokeSort.NUMBER -> localDataSource.getAllPokemon(name)
+                    PokeSort.ASC -> localDataSource.getAllPokemonAsc(name)
+                    PokeSort.DESC -> localDataSource.getAllPokemonDesc(name)
+                }
             },
             createCall = {
                 remoteDataSource.getListPokemon()

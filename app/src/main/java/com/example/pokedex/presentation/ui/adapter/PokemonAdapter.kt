@@ -26,6 +26,7 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     override fun getItemCount(): Int = items.size
 
     fun submitList(items: List<PokemonEntity>){
+        this.items.toMutableList().clear()
         this.items = items
         notifyDataSetChanged()
     }

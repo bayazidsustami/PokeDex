@@ -2,6 +2,6 @@ package com.example.pokedex.common
 
 enum class PokeSort {
     ASC,
-    DSC,
+    DESC,
     NUMBER
 }

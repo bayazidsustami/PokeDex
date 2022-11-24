@@ -3,8 +3,8 @@ package com.example.pokedex.presentation.ui.activity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.pokedex.common.PokeSort
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
-import com.example.pokedex.data.datasource.remote.response.Pokemon
 import com.example.pokedex.databinding.ActivityHomeBinding
 import com.example.pokedex.presentation.UiEvent
 import com.example.pokedex.presentation.ui.adapter.PokemonAdapter
@@ -23,6 +23,12 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         super.onCreate(savedInstanceState)
         viewModel.getPokemonList()
 
+        initRecyclerView()
+
+        binding.btnSort.onShortingChangeListener {
+            viewModel.getPokemonList(sortBy = it)
+        }
+
         viewModel.pokeList.observe(this){
             when(it) {
                 is UiEvent.Loading -> {}
@@ -34,13 +40,16 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
         }
     }
 
-    private fun renderList(items: List<PokemonEntity>) {
+    private fun initRecyclerView(){
         with(binding.rvListPoke) {
             adapter = this@HomeActivity.adapter
             layoutManager = GridLayoutManager(this@HomeActivity, 3)
             setHasFixedSize(true)
             addItemDecoration(SpaceItemDecoration(3, 24, false))
         }
+    }
+
+    private fun renderList(items: List<PokemonEntity>) {
         adapter.submitList(items)
     }
 

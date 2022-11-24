@@ -16,6 +16,7 @@
     
     <style name="TextAppearance.AppCompat.Regular" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
     <style name="TextAppearance.AppCompat.Bold" parent="Widget.AppCompat.TextView">
         <item name="fontFamily">@font/bold</item>

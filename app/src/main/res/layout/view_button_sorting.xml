@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/ic_hashtag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10sp"
+        android:textColor="@color/dark_gray"
+        android:layout_marginEnd="1dp"
+        android:visibility="visible"
+        style="@style/TextAppearance.AppCompat.Regular"
+        android:text="@string/hash_tag"/>
+
+    <LinearLayout
+        android:id="@+id/container_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="2dp"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/top_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textColor="@color/dark_gray"
+            android:textSize="7sp"
+            android:lineHeight="8sp"
+            android:layout_weight="1"
+            android:text="@string/top_text"/>
+        <TextView
+            android:id="@+id/bottom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Regular"
+            android:textColor="@color/dark_gray"
+            android:layout_weight="1"
+            android:textSize="7sp"
+            android:lineHeight="8sp"
+            android:text="@string/bottom_text"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ic_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        android:contentDescription="@string/icon_arrow"
+        app:srcCompat="@drawable/ic_arrow_down"/>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.pokedex.presentation
 
+import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
@@ -8,6 +9,14 @@ fun ImageView.loadImage(url: String) {
     Glide.with(this)
         .load(url)
         .into(this)
+}
+
+fun View.gone() {
+    visibility = View.GONE
+}
+
+fun View.visible() {
+    visibility = View.VISIBLE
 }
 
 val listPokeColors: List<Int>

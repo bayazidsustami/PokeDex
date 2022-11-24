@@ -13,7 +13,15 @@ class PokeHomeLocalDataSource @Inject constructor(
         dao.insertAll(items)
     }
 
-    fun getAllPokemon(): Flow<List<PokemonEntity>> {
-        return dao.getAllPokemon()
+    fun getAllPokemon(query: String): Flow<List<PokemonEntity>> {
+        return dao.getAllPokemon(query)
+    }
+
+    fun getAllPokemonAsc(query: String): Flow<List<PokemonEntity>> {
+        return dao.getAllPokemonAsc(query)
+    }
+
+    fun getAllPokemonDesc(query: String): Flow<List<PokemonEntity>> {
+        return dao.getAllPokemonDesc(query)
     }
 }

@@ -29,6 +29,13 @@
             app:srcCompat="@drawable/poke_dex"/>
     </LinearLayout>
 
+    <com.example.pokedex.presentation.ui.widget.ButtonSortingView
+        android:id="@+id/btn_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <EditText
         android:id="@+id/et_search"
         android:layout_width="match_parent"

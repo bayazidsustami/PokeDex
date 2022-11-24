@@ -1,9 +1,11 @@
 package com.example.pokedex.presentation
 
+import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
+import com.google.android.material.progressindicator.LinearProgressIndicator
 
 fun ImageView.loadImage(url: String) {
     Glide.with(this)
@@ -17,6 +19,42 @@ fun View.gone() {
 
 fun View.visible() {
     visibility = View.VISIBLE
+}
+
+fun LinearProgressIndicator.setColor(types: String) {
+    setIndicatorColor(Color.parseColor(colorHex(types)))
+    trackColor = Color.parseColor(colorHex20Opacity(types))
+    trackCornerRadius = 8
+}
+
+fun colorHex(types: String): String {
+    return when(types) {
+        "type_grass" -> "#74CB48"
+        "type_fire" -> "#F57D31"
+        "type_water" -> "#6493EB"
+        "type_bug" -> "#A7B723"
+        "type_electric" -> "#F9CF30"
+        "type_gosh" -> "#70559B"
+        "type_normal" -> "#AAA67F"
+        "type_psychic" -> "#FB5584"
+        "type_steel"-> "#B7B9D0"
+        else -> "#74CB48"
+    }
+}
+
+fun colorHex20Opacity(types: String): String {
+    return when(types) {
+        "type_grass" -> "#3374CB48"
+        "type_fire" -> "#33F57D31"
+        "type_water" -> "#336493EB"
+        "type_bug" -> "#33A7B723"
+        "type_electric" -> "#33F9CF30"
+        "type_gosh" -> "#3370559B"
+        "type_normal" -> "#33AAA67F"
+        "type_psychic" -> "#33FB5584"
+        "type_steel"-> "#33B7B9D0"
+        else -> "#3374CB48"
+    }
 }
 
 fun getColorRes(types: String) : Int {

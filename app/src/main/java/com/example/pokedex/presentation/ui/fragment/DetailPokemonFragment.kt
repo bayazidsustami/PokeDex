@@ -5,13 +5,22 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.FragmentDetailBinding
+import com.example.pokedex.presentation.UiEvent
 import com.example.pokedex.presentation.getColorRes
 import com.example.pokedex.presentation.loadImage
+import com.example.pokedex.presentation.setColor
 import com.example.pokedex.presentation.ui.base.BaseFragment
+import com.example.pokedex.presentation.viewmodel.DetailViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
+
+    private val viewModel by viewModels<DetailViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -19,7 +28,6 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         val data = arguments?.getParcelable<PokemonEntity>(EXTRA_DATA)
-
         data?.let {
             with(binding) {
                 ivPokemon.loadImage(it.imageUrl)
@@ -27,14 +35,80 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
                 tvPokeNumber.text = it.pokeNumber
             }
 
+            val rawId = it.pokeNumber.removePrefix("#").toInt()
+            viewModel.fetchDetails(rawId.toString())
+
             setColors(it.colorTypes)
+            renderStatsColor(it.colorTypes)
         }
 
         binding.ivBack.setOnClickListener {
             activity?.finish()
         }
 
+
+        observeDetails()
+
     }
+
+    private fun observeDetails() {
+        viewModel.pokemonDetail.observe(viewLifecycleOwner){
+            when(it) {
+                is UiEvent.Loading -> {}
+                is UiEvent.Success -> {
+                    renderUi(it.data)
+                }
+                is UiEvent.Error -> {}
+            }
+        }
+    }
+
+    private fun renderUi(data: PokemonDetailEntity) {
+        renderAttributes(data)
+        renderStats(data)
+    }
+
+    private fun renderAttributes(data: PokemonDetailEntity) {
+        with(binding.viewAttributes) {
+            tvHeight.text = data.getHeightString()
+            tvWeight.text = data.getWeightString()
+            tvMoves.text = data.move
+        }
+    }
+
+    private fun renderStats(data: PokemonDetailEntity) {
+        with(binding.viewStats) {
+            progressHp.setProgress(data.hp, true)
+            progressAtk.setProgress(data.attack, true)
+            progressDef.setProgress(data.defense, true)
+            progressSdef.setProgress(data.specialDefense, true)
+            progressSatk.setProgress(data.specialAttack, true)
+            progressSpd.setProgress(data.speed, true)
+
+            tvAtkValue.text = data.attack.toValueFormatted()
+            tvHpValue.text = data.hp.toValueFormatted()
+            tvDefValue.text = data.defense.toValueFormatted()
+            tvSdefValue.text = data.specialDefense.toValueFormatted()
+            tvSatkValue.text = data.specialAttack.toValueFormatted()
+            tvSpdValue.text = data.speed.toValueFormatted()
+        }
+    }
+
+    private fun renderStatsColor(types: String){
+        with(binding.viewStats){
+            progressHp.setColor(types)
+            progressAtk.setColor(types)
+            progressDef.setColor(types)
+            progressSdef.setColor(types)
+            progressSatk.setColor(types)
+            progressSpd.setColor(types)
+        }
+    }
+
+    private fun Int.toValueFormatted(): String {
+        return String.format("%03d", this)
+    }
+
 
     private fun setColors(colorTypes: String) {
         with(binding) {

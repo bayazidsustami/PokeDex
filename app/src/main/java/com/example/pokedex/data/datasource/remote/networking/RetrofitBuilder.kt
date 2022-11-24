@@ -4,28 +4,45 @@ import com.example.pokedex.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
-import java.util.concurrent.TimeUnit
+import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
 
     fun get(): ApiService {
         val builder = Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .client(getOkhttpClient())
             .build()
         return builder.create(ApiService::class.java)
     }
 
     private fun getOkhttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .readTimeout(TIME_OUT, TimeUnit.SECONDS)
-            .build()
-    }
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
 
-    private const val TIME_OUT = 30L
+        var okhttpBuilder: OkHttpClient.Builder = OkHttpClient.Builder()
+            .addInterceptor { chain ->
+                val original  = chain.request()
+                val request = original.newBuilder()
+                    .method(original.method, original.body)
+                    .build()
+                chain.proceed(request)
+            }
+            .addInterceptor { chain ->
+                val url = chain.request()
+                    .url
+                    .newBuilder()
+                    .build()
+                val request = chain.request().newBuilder().url(url).build()
+                chain.proceed(request)
+            }
+
+        if (BuildConfig.DEBUG){
+            okhttpBuilder = okhttpBuilder.addInterceptor(loggingInterceptor)
+        }
+        return okhttpBuilder.build()
+    }
 
 }

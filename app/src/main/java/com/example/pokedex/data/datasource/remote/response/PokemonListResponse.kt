@@ -1,16 +1,14 @@
 package com.example.pokedex.data.datasource.remote.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class PokemonListResponse(
-    @field:Json(name = "count")
+    @SerializedName("count")
     val count: Int = 0,
-    @field:Json(name = "next")
+    @SerializedName("next")
     val next: String = "",
-    @field:Json(name = "previous")
+    @SerializedName("previous")
     val previous: String = "",
-    @field:Json(name = "results")
+    @SerializedName("results")
     val results: List<Pokemon> = emptyList()
 )

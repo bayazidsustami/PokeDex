@@ -1,13 +1,11 @@
 package com.example.pokedex.data.datasource.remote.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
-@JsonClass(generateAdapter = true)
 data class Pokemon(
-    @Json(name = "name")
+    @SerializedName("name")
     val name: String,
-    @Json(name = "url")
+    @SerializedName("url")
     val url: String
 ){
 

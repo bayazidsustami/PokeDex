@@ -1,22 +1,20 @@
 package com.example.pokedex.data.datasource.remote.response
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 import kotlin.random.Random
 
-@JsonClass(generateAdapter = true)
 data class PokemonDetail(
-    @Json(name = "id")
+    @SerializedName( "id")
     val id: Int = 0,
-    @Json(name = "name")
+    @SerializedName( "name")
     val name: String = "",
-    @Json(name = "height")
+    @SerializedName( "height")
     val height: Int = 0,
-    @Json(name = "weight")
+    @SerializedName( "weight")
     val weight: Int = 0,
-    @Json(name = "base_experience")
+    @SerializedName( "base_experience")
     val experience: Int = 0,
-    @Json(name = "types")
+    @SerializedName( "types")
     val types: List<TypeResponse> = emptyList(),
     val hp: Int = Random.nextInt(maxHp),
     val attack: Int = Random.nextInt(maxAttack),
@@ -34,17 +32,15 @@ data class PokemonDetail(
     fun getSpeedString(): String = " $speed/$maxSpeed"
     fun getExpString(): String = " $exp/$maxExp"
 
-    @JsonClass(generateAdapter = true)
     data class TypeResponse(
-        @Json(name = "slot")
+        @SerializedName( "slot")
         val slot: Int = 0,
-        @Json(name = "type")
+        @SerializedName( "type")
         val type: Type = Type()
     )
 
-    @JsonClass(generateAdapter = true)
     data class Type(
-        @Json(name = "name") val name: String = ""
+        @SerializedName( "name") val name: String = ""
     )
 
     companion object {

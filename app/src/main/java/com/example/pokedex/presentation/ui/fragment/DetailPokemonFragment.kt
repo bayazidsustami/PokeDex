@@ -2,6 +2,7 @@ package com.example.pokedex.presentation.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.FragmentDetailBinding
 import com.example.pokedex.presentation.loadImage
@@ -12,14 +13,27 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
         val data = arguments?.getParcelable<PokemonEntity>(EXTRA_DATA)
 
         data?.let {
-            binding.ivPokemon.loadImage(it.imageUrl)
-            binding.tvPokeName.text = it.pokeName
-            binding.tvPokeNumber.text = it.pokeNumber
+            with(binding) {
+                ivPokemon.loadImage(it.imageUrl)
+                tvPokeName.text = it.pokeName
+                tvPokeNumber.text = it.pokeNumber
+            }
         }
 
+        binding.ivBack.setOnClickListener {
+            activity?.finish()
+        }
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
     companion object{

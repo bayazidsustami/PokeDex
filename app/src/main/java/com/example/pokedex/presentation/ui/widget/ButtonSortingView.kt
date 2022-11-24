@@ -79,6 +79,8 @@ class ButtonSortingView: LinearLayout {
         with(binding) {
             icHashtag.gone()
             containerText.visible()
+            topText.text = context.getText(R.string.top_text)
+            bottomText.text = context.getText(R.string.bottom_text)
         }
     }
 

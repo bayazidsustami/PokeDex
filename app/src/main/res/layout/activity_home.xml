@@ -36,19 +36,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <EditText
+    <com.example.pokedex.presentation.ui.widget.SearchEditTextView
         android:id="@+id/et_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textSize="10sp"
-        android:lineHeight="16sp"
-        android:padding="4dp"
-        android:fontFamily="@font/regular"
-        android:background="@drawable/bg_search_field"
-        android:inputType="text"
-        android:autofillHints="name"
-        android:hint="@string/et_search_hint"
         app:layout_constraintTop_toBottomOf="@id/container_icon"/>
 
     <androidx.recyclerview.widget.RecyclerView

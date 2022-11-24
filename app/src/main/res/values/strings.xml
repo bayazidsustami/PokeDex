@@ -9,4 +9,5 @@
     <string name="hash_tag">#</string>
     <string name="top_text">A</string>
     <string name="bottom_text">Z</string>
+    <string name="icon_search">Search</string>
 </resources>

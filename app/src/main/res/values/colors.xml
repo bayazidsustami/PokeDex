@@ -10,4 +10,13 @@
     <color name="background">#F7F7F7</color>
     <color name="light_gray">#E0E0E0</color>
     <color name="dark_gray">#212121</color>
+    <color name="type_grass">#74CB48</color>
+    <color name="type_fire">#F57D31</color>
+    <color name="type_water">#6493EB</color>
+    <color name="type_bug">#A7B723</color>
+    <color name="type_electric">#F9CF30</color>
+    <color name="type_gosh">#70559B</color>
+    <color name="type_normal">#AAA67F</color>
+    <color name="type_psychic">#FB5584</color>
+    <color name="type_steel">#B7B9D0</color>
 </resources>

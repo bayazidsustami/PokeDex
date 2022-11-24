@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.data.datasource.remote.response.Pokemon
 import com.example.pokedex.databinding.ViewPokemonItemBinding
+import com.example.pokedex.presentation.listPokeColors
 import com.example.pokedex.presentation.loadImage
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
@@ -34,10 +35,14 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Pokemon) {
+            val randIndex = (0..8).random()
+            val color = listPokeColors[randIndex]
             with(binding) {
                 tvPokeNumber.text = data.getPokeNumber()
                 ivPokemon.loadImage(data.getImageUrl())
                 tvPokeName.text = data.name
+                viewBackground.setBackgroundResource(color)
+                tvPokeNumber.setTextColor(color)
             }
         }
     }

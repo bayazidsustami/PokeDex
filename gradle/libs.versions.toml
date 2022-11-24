@@ -14,6 +14,7 @@ espresso-core = "3.5.0"
 dagger-hilt = "2.44"
 activity-ktx = "1.6.1"
 lifecycle-extensions = "2.2.0"
+glide = "4.14.2"
 
 [libraries]
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -33,6 +34,7 @@ hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" 
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
 activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
 lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref="lifecycle-extensions"}
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 
 [bundles]
 squareup = ["retrofit", "gson-converter", "interceptor"]

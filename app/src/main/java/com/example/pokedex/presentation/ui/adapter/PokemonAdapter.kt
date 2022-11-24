@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokedex.data.datasource.remote.response.Pokemon
 import com.example.pokedex.databinding.ViewPokemonItemBinding
+import com.example.pokedex.presentation.loadImage
 
 class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -35,6 +36,8 @@ class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
         fun bind(data: Pokemon) {
             with(binding) {
                 tvPokeNumber.text = data.getPokeNumber()
+                ivPokemon.loadImage(data.getImageUrl())
+                tvPokeName.text = data.name
             }
         }
     }

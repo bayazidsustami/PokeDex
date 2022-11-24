@@ -28,6 +28,13 @@ data class PokemonDetailEntity(
     val defense: Int,
     @ColumnInfo(name = "speed")
     val speed: Int,
-    @ColumnInfo(name = "exp")
-    val exp:Int
-)
+    @ColumnInfo(name="special_attack")
+    val specialAttack: Int,
+    @ColumnInfo(name="special_defense")
+    val specialDefense: Int,
+    @ColumnInfo(name="move")
+    val move: String
+) {
+    fun getWeightString(): String = String.format("%.1f KG", weight.toFloat() / 10)
+    fun getHeightString(): String = String.format("%.1f M", height.toFloat() / 10)
+}

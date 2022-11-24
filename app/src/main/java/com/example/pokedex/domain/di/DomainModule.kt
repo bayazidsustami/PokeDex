@@ -1,5 +1,7 @@
 package com.example.pokedex.domain.di
 
+import com.example.pokedex.domain.PokemonDetailUseCase
+import com.example.pokedex.domain.PokemonDetailUseCaseImpl
 import com.example.pokedex.domain.PokemonHomeUseCase
 import com.example.pokedex.domain.PokemonHomeUseCaseImpl
 import dagger.Binds
@@ -13,4 +15,7 @@ abstract class DomainModule {
 
     @Binds
     abstract fun bindPokeHomeUseCase(homeUseCase: PokemonHomeUseCaseImpl): PokemonHomeUseCase
+
+    @Binds
+    abstract fun bindPokeDetailUseCase(detailUseCase: PokemonDetailUseCaseImpl): PokemonDetailUseCase
 }

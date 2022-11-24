@@ -28,11 +28,22 @@ class Mapper @Inject constructor() {
             response.weight,
             response.experience,
             response.types,
-            response.hp,
-            response.attack,
-            response.defense,
-            response.speed,
-            response.exp
+            hp = response.stats[INDEX_HP].baseStat,
+            attack = response.stats[INDEX_ATTACK].baseStat,
+            defense = response.stats[INDEX_DEFENSE].baseStat,
+            speed = response.stats[INDEX_SPEED].baseStat,
+            specialAttack = response.stats[INDEX_SPECIAL_ATTACK].baseStat,
+            specialDefense = response.stats[INDEX_SPECIAL_DEFENSE].baseStat,
+            move = response.moves[0].move.name
         )
+    }
+
+    private companion object {
+        const val INDEX_HP = 0
+        const val INDEX_ATTACK = 1
+        const val INDEX_DEFENSE = 2
+        const val INDEX_SPECIAL_ATTACK = 3
+        const val INDEX_SPECIAL_DEFENSE = 4
+        const val INDEX_SPEED = 5
     }
 }

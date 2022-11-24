@@ -13,6 +13,7 @@ android-junit = "1.1.4"
 espresso-core = "3.5.0"
 dagger-hilt = "2.44"
 activity-ktx = "1.6.1"
+fragment-ktx = "1.5.4"
 lifecycle-extensions = "2.2.0"
 glide = "4.14.2"
 
@@ -33,6 +34,7 @@ espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref =
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
 activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
+fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref= "fragment-ktx" }
 lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref="lifecycle-extensions"}
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 
@@ -40,7 +42,7 @@ glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 squareup = ["retrofit", "gson-converter", "interceptor"]
 room = ["room-ktx", "room-runtime"]
 standart = ["core-ktx", "appcompat", "material-design", "constraint-layout"]
-extensions = ["activity-ktx", "lifecycle-extensions"]
+extensions = ["activity-ktx", "lifecycle-extensions", "fragment-ktx"]
 unittest = ["junit"]
 instrumentationtest = ["android-junit", "espresso-core"]
 

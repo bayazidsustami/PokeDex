@@ -13,6 +13,6 @@ interface PokemonDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPokemon(pokemonInfo: PokemonDetailEntity)
 
-    @Query("SELECT * FROM pokemon_detail_entity WHERE name = :id")
+    @Query("SELECT * FROM pokemon_detail_entity WHERE id = :id")
     fun getPokemonInfo(id: String): Flow<PokemonDetailEntity>
 }

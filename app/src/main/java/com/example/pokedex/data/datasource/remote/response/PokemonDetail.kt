@@ -16,21 +16,11 @@ data class PokemonDetail(
     val experience: Int = 0,
     @SerializedName( "types")
     val types: List<TypeResponse> = emptyList(),
-    val hp: Int = Random.nextInt(maxHp),
-    val attack: Int = Random.nextInt(maxAttack),
-    val defense: Int = Random.nextInt(maxDefense),
-    val speed: Int = Random.nextInt(maxSpeed),
-    val exp: Int = Random.nextInt(maxExp)
+    @SerializedName("stats")
+    val stats: List<Stats> = emptyList(),
+    @SerializedName("moves")
+    val moves: List<Moves> = emptyList()
 ) {
-
-    fun getIdString(): String = String.format("#%03d", id)
-    fun getWeightString(): String = String.format("%.1f KG", weight.toFloat() / 10)
-    fun getHeightString(): String = String.format("%.1f M", height.toFloat() / 10)
-    fun getHpString(): String = " $hp/$maxHp"
-    fun getAttackString(): String = " $attack/$maxAttack"
-    fun getDefenseString(): String = " $defense/$maxDefense"
-    fun getSpeedString(): String = " $speed/$maxSpeed"
-    fun getExpString(): String = " $exp/$maxExp"
 
     data class TypeResponse(
         @SerializedName( "slot")
@@ -41,6 +31,33 @@ data class PokemonDetail(
 
     data class Type(
         @SerializedName( "name") val name: String = ""
+    )
+
+    class Stats(
+
+        @SerializedName("stat")
+        val stat: Stat = Stat(),
+
+        @SerializedName("base_stat")
+        val baseStat: Int = 0,
+
+        @SerializedName("effort")
+        val effort: Int = 0
+    )
+
+    class Stat(
+        @SerializedName("name")
+        val name: String = "",
+    )
+
+    data class Moves(@SerializedName("move") val move: Move = Move())
+
+    class Move(
+        @SerializedName("name")
+        val name: String = "",
+
+        @SerializedName("url")
+        val url: String = ""
     )
 
     companion object {

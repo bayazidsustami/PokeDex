@@ -134,6 +134,7 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <include
+        android:id="@+id/view_stats"
         layout="@layout/view_stats"
         android:layout_width="match_parent"
         android:layout_height="100dp"

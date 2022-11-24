@@ -9,5 +9,6 @@ object Constant {
 
     object Values {
         const val RETRY_TIME = 3L
+        const val COUNT_LIMIT = 100
     }
 }

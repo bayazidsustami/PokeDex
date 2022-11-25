@@ -16,8 +16,8 @@ data class PokemonDetailEntity(
     val height: Int,
     @ColumnInfo(name = "weight")
     val weight: Int,
-    @ColumnInfo(name = "base_experience")
-    val baseExperience: Int,
+    @ColumnInfo(name = "ability")
+    val ability: String,
     @ColumnInfo(name = "types")
     val types: List<PokemonDetail.TypeResponse>,
     @ColumnInfo(name = "hp")

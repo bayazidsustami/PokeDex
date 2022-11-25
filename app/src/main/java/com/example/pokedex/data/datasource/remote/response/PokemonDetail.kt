@@ -19,7 +19,8 @@ data class PokemonDetail(
     @SerializedName("stats")
     val stats: List<Stats> = emptyList(),
     @SerializedName("moves")
-    val moves: List<Moves> = emptyList()
+    val moves: List<Moves> = emptyList(),
+    val ability: String = ""
 ) {
 
     data class TypeResponse(

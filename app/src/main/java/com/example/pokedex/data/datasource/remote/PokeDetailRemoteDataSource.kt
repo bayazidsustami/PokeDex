@@ -21,8 +21,10 @@ class PokeDetailRemoteDataSource @Inject constructor(
     suspend fun getDetailPokemon(id: String): Flow<ApiResponse<PokemonDetail>> {
         return flow {
             try {
+                val responseAbilities = apiService.getPokemonAbilities(id).effectEntries
                 val response = apiService.getPokemonDetail(id)
-                emit(ApiResponse.Success(response))
+                val resultCopy = response.copy(ability = responseAbilities[1].effect)
+                emit(ApiResponse.Success(resultCopy))
             } catch (e: HttpException){
                 emit(ApiResponse.Fail(e.message(), e.code()))
             } catch (e: Exception){

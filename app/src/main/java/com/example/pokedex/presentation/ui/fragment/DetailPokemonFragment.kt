@@ -69,6 +69,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
     }
 
     private fun renderTypes(data: PokemonDetailEntity) {
+        binding.containerTypes.removeAllViews()
         data.types.forEach {
             val chips = Chip(requireContext())
             chips.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
@@ -85,6 +86,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             tvWeight.text = data.getWeightString()
             tvMoves.text = data.move
         }
+        binding.tvPokeDesc.text = data.ability
     }
 
     private fun renderStats(data: PokemonDetailEntity) {

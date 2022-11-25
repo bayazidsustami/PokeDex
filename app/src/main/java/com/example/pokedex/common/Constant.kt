@@ -5,6 +5,7 @@ object Constant {
     object Endpoints {
         const val HOME = "pokemon"
         const val DETAIL = "$HOME/{name}"
+        const val ABILITIES = "ability/{id}"
     }
 
     object Values {

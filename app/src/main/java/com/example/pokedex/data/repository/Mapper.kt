@@ -26,7 +26,7 @@ class Mapper @Inject constructor() {
             response.name,
             response.height,
             response.weight,
-            response.experience,
+            response.ability,
             response.types,
             hp = response.stats[INDEX_HP].baseStat,
             attack = response.stats[INDEX_ATTACK].baseStat,

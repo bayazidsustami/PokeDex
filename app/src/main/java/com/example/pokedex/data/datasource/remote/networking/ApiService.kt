@@ -1,6 +1,7 @@
 package com.example.pokedex.data.datasource.remote.networking
 
 import com.example.pokedex.common.Constant
+import com.example.pokedex.data.datasource.remote.response.PokemonAbilitiesResponse
 import com.example.pokedex.data.datasource.remote.response.PokemonDetail
 import com.example.pokedex.data.datasource.remote.response.PokemonListResponse
 import retrofit2.http.GET
@@ -18,4 +19,9 @@ interface ApiService {
     suspend fun getPokemonDetail(
         @Path("name") id: String
     ): PokemonDetail
+
+    @GET(Constant.Endpoints.ABILITIES)
+    suspend fun getPokemonAbilities(
+        @Path("id") id: String
+    ): PokemonAbilitiesResponse
 }

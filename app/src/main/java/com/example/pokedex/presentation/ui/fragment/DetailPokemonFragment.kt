@@ -12,7 +12,6 @@ import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.FragmentDetailBinding
 import com.example.pokedex.presentation.*
-import com.example.pokedex.presentation.ui.adapter.PokemonAdapter
 import com.example.pokedex.presentation.ui.adapter.PokemonEvolutionAdapter
 import com.example.pokedex.presentation.ui.base.BaseFragment
 import com.example.pokedex.presentation.viewmodel.DetailViewModel
@@ -31,20 +30,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         val data = arguments?.getParcelable<PokemonEntity>(EXTRA_DATA)
-        data?.let {
-            with(binding) {
-                ivPokemon.loadImage(it.imageUrl)
-                tvPokeName.text = it.pokeName
-                tvPokeNumber.text = it.pokeNumber
-            }
-
-            val rawId = it.pokeNumber.removePrefix("#").toInt()
-            viewModel.fetchDetails(rawId.toString())
-            viewModel.fetchPokeEvolutions(rawId.toString())
-
-            setColors(it.colorTypes)
-            renderStatsColor(it.colorTypes)
-        }
+        data?.let { initView(it) }
 
         binding.ivBack.setOnClickListener {
             activity?.finish()
@@ -52,6 +38,21 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
 
         observeDetails()
 
+    }
+
+    private fun initView(data: PokemonEntity) {
+        with(binding) {
+            ivPokemon.loadImage(data.imageUrl)
+            tvPokeName.text = data.pokeName
+            tvPokeNumber.text = data.pokeNumber
+        }
+
+        val rawId = data.pokeNumber.removePrefix("#").toInt()
+        viewModel.fetchDetails(rawId.toString())
+        viewModel.fetchPokeEvolutions(rawId.toString())
+
+        setColors(data.colorTypes)
+        renderStatsColor(data.colorTypes)
     }
 
     private fun observeDetails() {
@@ -139,6 +140,8 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
+
+        evolutionsAdapter.setOnClickListener { initView(it) }
     }
 
     private fun Int.toValueFormatted(): String {

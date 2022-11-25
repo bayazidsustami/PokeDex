@@ -28,10 +28,6 @@ class PokemonEvolutionAdapter: RecyclerView.Adapter<PokemonEvolutionAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(items[position])
-
-        holder.binding.root.setOnClickListener {
-            clickListener?.onClick(position)
-        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -52,11 +48,15 @@ class PokemonEvolutionAdapter: RecyclerView.Adapter<PokemonEvolutionAdapter.View
                 ivPokemon.loadImage(data.imageUrl)
                 tvPokeName.text = data.pokeName
                 tvPokeName.setTextColor(ContextCompat.getColor(itemView.context, getColorRes(data.colorTypes)))
+
+                ivPokemon.setOnClickListener {
+                    clickListener?.onClick(data)
+                }
             }
         }
     }
 
     fun interface OnClickListener {
-        fun onClick(position: Int)
+        fun onClick(data: PokemonEntity)
     }
 }

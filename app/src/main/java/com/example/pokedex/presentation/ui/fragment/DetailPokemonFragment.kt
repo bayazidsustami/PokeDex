@@ -6,11 +6,14 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.R
 import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.FragmentDetailBinding
 import com.example.pokedex.presentation.*
+import com.example.pokedex.presentation.ui.adapter.PokemonAdapter
+import com.example.pokedex.presentation.ui.adapter.PokemonEvolutionAdapter
 import com.example.pokedex.presentation.ui.base.BaseFragment
 import com.example.pokedex.presentation.viewmodel.DetailViewModel
 import com.google.android.material.chip.Chip
@@ -20,6 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailBinding::inflate) {
 
     private val viewModel by viewModels<DetailViewModel>()
+    private val evolutionsAdapter by lazy(LazyThreadSafetyMode.NONE) { PokemonEvolutionAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +49,6 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             activity?.finish()
         }
 
-
         observeDetails()
 
     }
@@ -66,6 +69,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
         renderAttributes(data)
         renderStats(data)
         renderTypes(data)
+        renderEvolutions()
     }
 
     private fun renderTypes(data: PokemonDetailEntity) {
@@ -118,6 +122,38 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
         }
     }
 
+    private fun renderEvolutions() {
+        with(binding.rvEvolutions) {
+            adapter = evolutionsAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
+            setHasFixedSize(true)
+        }
+        evolutionsAdapter.submitList(fakeData())
+    }
+
+    private fun fakeData(): List<PokemonEntity>{
+        return listOf(
+            PokemonEntity(
+                pokeNumber="#001",
+                pokeName="bulbasaur",
+                url="https://pokeapi.co/api/v2/pokemon/1/",
+                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                colorTypes="type_grass"),
+            PokemonEntity(
+                pokeNumber="#001",
+                pokeName="bulbasaur",
+                url="https://pokeapi.co/api/v2/pokemon/1/",
+                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                colorTypes="type_grass"),
+            PokemonEntity(
+                pokeNumber="#001",
+                pokeName="bulbasaur",
+                url="https://pokeapi.co/api/v2/pokemon/1/",
+                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+                colorTypes="type_grass")
+        )
+    }
+
     private fun Int.toValueFormatted(): String {
         return String.format("%03d", this)
     }
@@ -128,6 +164,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             container.setBackgroundResource(getColorRes(colorTypes))
             tvAbout.setTextColor(colorTypes)
             tvBaseStats.setTextColor(colorTypes)
+            tvEvolutions.setTextColor(colorTypes)
             viewStats.tvHp.setTextColor(colorTypes)
             viewStats.tvAtk.setTextColor(colorTypes)
             viewStats.tvDef.setTextColor(colorTypes)

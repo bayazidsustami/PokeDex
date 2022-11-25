@@ -2,17 +2,20 @@ package com.example.pokedex.presentation.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.pokedex.common.PokeSort
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.ActivityHomeBinding
 import com.example.pokedex.presentation.UiEvent
+import com.example.pokedex.presentation.gone
 import com.example.pokedex.presentation.ui.adapter.PokemonAdapter
 import com.example.pokedex.presentation.ui.adapter.SpaceItemDecoration
 import com.example.pokedex.presentation.ui.base.BaseActivity
 import com.example.pokedex.presentation.ui.widget.SearchEditTextView
 import com.example.pokedex.presentation.viewmodel.HomeViewModel
+import com.example.pokedex.presentation.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,12 +42,36 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
 
         viewModel.pokeList.observe(this){
             when(it) {
-                is UiEvent.Loading -> {}
+                is UiEvent.Loading -> {
+                    showLoading()
+                }
                 is UiEvent.Success -> {
+                    hideLoading()
                     renderList(it.data)
                 }
-                is UiEvent.Error -> {}
+                is UiEvent.Error -> {
+                    hideLoading()
+                    showToast(it.message)
+                }
             }
+        }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoading() {
+        with(binding){
+            rvListPoke.gone()
+            shimmerContent.visible()
+        }
+    }
+
+    private fun hideLoading() {
+        with(binding) {
+            rvListPoke.visible()
+            shimmerContent.gone()
         }
     }
 

@@ -6,6 +6,7 @@ object Constant {
         const val HOME = "pokemon"
         const val DETAIL = "$HOME/{name}"
         const val ABILITIES = "ability/{id}"
+        const val EVOLUTIONS = "evolution-chain/{id}"
     }
 
     object Values {

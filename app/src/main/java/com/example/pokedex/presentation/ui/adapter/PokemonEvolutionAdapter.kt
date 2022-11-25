@@ -52,7 +52,6 @@ class PokemonEvolutionAdapter: RecyclerView.Adapter<PokemonEvolutionAdapter.View
                 ivPokemon.loadImage(data.imageUrl)
                 tvPokeName.text = data.pokeName
                 tvPokeName.setTextColor(ContextCompat.getColor(itemView.context, getColorRes(data.colorTypes)))
-
             }
         }
     }

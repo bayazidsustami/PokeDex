@@ -3,6 +3,7 @@ package com.example.pokedex.data.repository
 import com.example.pokedex.common.Resource
 import com.example.pokedex.data.datasource.local.PokeDetailLocalDataSource
 import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
+import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.data.datasource.remote.PokeDetailRemoteDataSource
 import com.example.pokedex.data.datasource.remote.utils.NetworkResource
 import kotlinx.coroutines.flow.Flow
@@ -27,6 +28,15 @@ class PokemonDetailRepositoryImpl @Inject constructor(
             saveCallResult = {
                 localDataSource.insertPokemon(mapper.mapDetailResponseToEntity(it))
             }
+        )
+    }
+
+    override fun getPokemonEvolution(id: String): Flow<Resource<List<PokemonEntity>>> {
+        return resource.fetchFromServer(
+            fetch = {
+                remoteDataSource.getPokemonEvolution(id)
+            },
+            mapper = { mapper.mapToEvolutionToEntity(it) }
         )
     }
 

@@ -5,6 +5,7 @@ import com.example.pokedex.common.Constant
 import com.example.pokedex.common.dispatchers.di.qulifiers.IODispatcher
 import com.example.pokedex.data.datasource.remote.networking.ApiService
 import com.example.pokedex.data.datasource.remote.response.PokemonDetail
+import com.example.pokedex.data.datasource.remote.response.PokemonEvolution
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -25,6 +26,25 @@ class PokeDetailRemoteDataSource @Inject constructor(
                 val response = apiService.getPokemonDetail(id)
                 val resultCopy = response.copy(ability = responseAbilities[1].effect)
                 emit(ApiResponse.Success(resultCopy))
+            } catch (e: HttpException){
+                emit(ApiResponse.Fail(e.message(), e.code()))
+            } catch (e: Exception){
+                emit(ApiResponse.Fail(e.message.toString(), 400))
+            }
+        }.retry(Constant.Values.RETRY_TIME) {
+            it is HttpException
+        }.flowOn(dispatcher)
+    }
+
+    suspend fun getPokemonEvolution(id: String): Flow<ApiResponse<PokemonEvolution>> {
+        return flow {
+            try {
+                val response = apiService.getPokemonEvolutions(id)
+                if (response.chain.evolvesTo.isNotEmpty()) {
+                    emit(ApiResponse.Success(response))
+                } else {
+                    emit(ApiResponse.Fail("empty evolutions", 404))
+                }
             } catch (e: HttpException){
                 emit(ApiResponse.Fail(e.message(), e.code()))
             } catch (e: Exception){

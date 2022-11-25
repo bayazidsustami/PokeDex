@@ -3,6 +3,7 @@ package com.example.pokedex.data.repository
 import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.data.datasource.remote.response.PokemonDetail
+import com.example.pokedex.data.datasource.remote.response.PokemonEvolution
 import com.example.pokedex.data.datasource.remote.response.PokemonListResponse
 import javax.inject.Inject
 
@@ -36,6 +37,45 @@ class Mapper @Inject constructor() {
             specialDefense = response.stats[INDEX_SPECIAL_DEFENSE].baseStat,
             move = response.moves[0].move.name
         )
+    }
+
+    fun mapToEvolutionToEntity(response: PokemonEvolution): List<PokemonEntity> {
+        val itemsPokemon:MutableList<PokemonEntity> = mutableListOf()
+        val first = response.chain.species
+
+        itemsPokemon.add(
+            PokemonEntity(
+            pokeNumber = first.getPokeNumber(),
+            pokeName = first.name,
+            url = first.url,
+            imageUrl = first.getImageUrl(),
+            ""
+        ))
+
+        if (response.chain.evolvesTo.isNotEmpty()) {
+            val second = response.chain.evolvesTo.first()
+            itemsPokemon.add(
+                PokemonEntity(
+                    pokeNumber = second.species.getPokeNumber(),
+                    pokeName = second.species.name,
+                    url = second.species.url,
+                    imageUrl = second.species.getImageUrl(),
+                    ""
+                ))
+
+            if (second.evolvesTo.isNotEmpty()) {
+                val third = second.evolvesTo.first()
+                itemsPokemon.add(
+                    PokemonEntity(
+                        pokeNumber = third.species.getPokeNumber(),
+                        pokeName = third.species.name,
+                        url = third.species.url,
+                        imageUrl = third.species.getImageUrl(),
+                        ""
+                    ))
+            }
+        }
+        return itemsPokemon
     }
 
     private companion object {

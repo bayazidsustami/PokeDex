@@ -40,6 +40,7 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
 
             val rawId = it.pokeNumber.removePrefix("#").toInt()
             viewModel.fetchDetails(rawId.toString())
+            viewModel.fetchPokeEvolutions(rawId.toString())
 
             setColors(it.colorTypes)
             renderStatsColor(it.colorTypes)
@@ -59,6 +60,16 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
                 is UiEvent.Loading -> {}
                 is UiEvent.Success -> {
                     renderUi(it.data)
+                }
+                is UiEvent.Error -> {}
+            }
+        }
+
+        viewModel.pokemonEvolution.observe(viewLifecycleOwner) {
+            when(it) {
+                is UiEvent.Loading -> {}
+                is UiEvent.Success -> {
+                    evolutionsAdapter.submitList(it.data)
                 }
                 is UiEvent.Error -> {}
             }
@@ -128,30 +139,6 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
             setHasFixedSize(true)
         }
-        evolutionsAdapter.submitList(fakeData())
-    }
-
-    private fun fakeData(): List<PokemonEntity>{
-        return listOf(
-            PokemonEntity(
-                pokeNumber="#001",
-                pokeName="bulbasaur",
-                url="https://pokeapi.co/api/v2/pokemon/1/",
-                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-                colorTypes="type_grass"),
-            PokemonEntity(
-                pokeNumber="#001",
-                pokeName="bulbasaur",
-                url="https://pokeapi.co/api/v2/pokemon/1/",
-                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-                colorTypes="type_grass"),
-            PokemonEntity(
-                pokeNumber="#001",
-                pokeName="bulbasaur",
-                url="https://pokeapi.co/api/v2/pokemon/1/",
-                imageUrl="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-                colorTypes="type_grass")
-        )
     }
 
     private fun Int.toValueFormatted(): String {

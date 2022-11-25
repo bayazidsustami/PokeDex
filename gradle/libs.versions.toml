@@ -17,6 +17,9 @@ fragment-ktx = "1.5.4"
 lifecycle-extensions = "2.2.0"
 glide = "4.14.2"
 shimmer = "0.5.0"
+mockk = "1.13.2"
+coroutine-test = "1.6.4"
+arch-test = "2.1.0"
 
 [libraries]
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
@@ -39,14 +42,18 @@ fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref= "fragme
 lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref="lifecycle-extensions"}
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk"}
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk"}
+coroutine-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutine-test"}
+arch-test = { module = "androidx.arch.core:core-testing", version.ref = "arch-test"}
 
 [bundles]
 squareup = ["retrofit", "gson-converter", "interceptor"]
 room = ["room-ktx", "room-runtime"]
 standart = ["core-ktx", "appcompat", "material-design", "constraint-layout"]
 extensions = ["activity-ktx", "lifecycle-extensions", "fragment-ktx"]
-unittest = ["junit"]
-instrumentationtest = ["android-junit", "espresso-core"]
+unittest = ["junit", "mockk", "coroutine-test", "arch-test"]
+instrumentationtest = ["android-junit", "espresso-core", "mockk-android"]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradleplugin" }

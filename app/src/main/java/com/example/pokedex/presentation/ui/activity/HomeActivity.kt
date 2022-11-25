@@ -76,7 +76,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(ActivityHomeBinding::infl
     }
 
     private fun doQueryChange() {
-        binding.etSearch.setOnSearchTextListener(object : SearchEditTextView.SearchTextListener{
+        binding.etSearchField.setOnSearchTextListener(object : SearchEditTextView.SearchTextListener{
             override fun onQueryString(query: String) {
                 queryString = query
                 viewModel.getPokemonList(query, sortBy ?: PokeSort.NUMBER)

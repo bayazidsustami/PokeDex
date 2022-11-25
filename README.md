@@ -11,7 +11,8 @@
 ## Tech Stack
 - Kotlin
 - MVVM pattern
-- Room 
+- Room
+- Dagger Hilt
 - Retrofit2
 - OkhttpClient
 - Kotlin Coroutine + Flow

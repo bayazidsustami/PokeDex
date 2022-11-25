@@ -159,8 +159,6 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
             viewStats.tvSdef.setTextColor(colorTypes)
             viewStats.tvSpd.setTextColor(colorTypes)
         }
-
-        evolutionsAdapter.setColor(colorTypes)
     }
 
     private fun TextView.setTextColor(colorTypes: String) {

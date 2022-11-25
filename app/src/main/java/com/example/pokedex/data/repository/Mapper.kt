@@ -49,7 +49,7 @@ class Mapper @Inject constructor() {
             pokeName = first.name,
             url = first.url,
             imageUrl = first.getImageUrl(),
-            ""
+            colorTypes = first.getRandomColorTypes()
         ))
 
         if (response.chain.evolvesTo.isNotEmpty()) {
@@ -60,7 +60,7 @@ class Mapper @Inject constructor() {
                     pokeName = second.species.name,
                     url = second.species.url,
                     imageUrl = second.species.getImageUrl(),
-                    ""
+                    second.species.getRandomColorTypes()
                 ))
 
             if (second.evolvesTo.isNotEmpty()) {
@@ -71,7 +71,7 @@ class Mapper @Inject constructor() {
                         pokeName = third.species.name,
                         url = third.species.url,
                         imageUrl = third.species.getImageUrl(),
-                        ""
+                        second.species.getRandomColorTypes()
                     ))
             }
         }

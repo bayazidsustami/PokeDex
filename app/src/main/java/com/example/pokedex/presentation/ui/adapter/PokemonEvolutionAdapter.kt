@@ -12,11 +12,16 @@ import com.example.pokedex.presentation.loadImage
 class PokemonEvolutionAdapter: RecyclerView.Adapter<PokemonEvolutionAdapter.ViewHolder>() {
 
     private var items: List<PokemonEntity> = emptyList()
+    private var colorTypes: String = ""
 
     private var clickListener: OnClickListener? = null
 
     fun setOnClickListener(clickListener: OnClickListener) {
         this.clickListener = clickListener
+    }
+
+    fun setColor(colorTypes: String) {
+        this.colorTypes = colorTypes
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -51,7 +56,7 @@ class PokemonEvolutionAdapter: RecyclerView.Adapter<PokemonEvolutionAdapter.View
                 tvPokeNumber.text = data.pokeNumber
                 ivPokemon.loadImage(data.imageUrl)
                 tvPokeName.text = data.pokeName
-                tvPokeName.setTextColor(ContextCompat.getColor(itemView.context, getColorRes(data.colorTypes)))
+                tvPokeName.setTextColor(ContextCompat.getColor(itemView.context, getColorRes(colorTypes)))
             }
         }
     }

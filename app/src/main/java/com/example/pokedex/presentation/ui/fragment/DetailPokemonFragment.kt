@@ -58,11 +58,16 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
     private fun observeDetails() {
         viewModel.pokemonDetail.observe(viewLifecycleOwner){
             when(it) {
-                is UiEvent.Loading -> {}
+                is UiEvent.Loading -> {
+                    showLoading()
+                }
                 is UiEvent.Success -> {
+                    hideLoading()
                     renderUi(it.data)
                 }
-                is UiEvent.Error -> {}
+                is UiEvent.Error -> {
+                    hideLoading()
+                }
             }
         }
 
@@ -74,6 +79,20 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
                 }
                 is UiEvent.Error -> {}
             }
+        }
+    }
+
+    private fun showLoading() {
+        with(binding){
+            container.gone()
+            shimmerContent.visible()
+        }
+    }
+
+    private fun hideLoading() {
+        with(binding) {
+            container.visible()
+            shimmerContent.gone()
         }
     }
 

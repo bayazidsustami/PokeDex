@@ -76,11 +76,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/container_details"/>
 
-    <LinearLayout
+    <com.google.android.material.chip.ChipGroup
         android:id="@+id/container_types"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/iv_pokemon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

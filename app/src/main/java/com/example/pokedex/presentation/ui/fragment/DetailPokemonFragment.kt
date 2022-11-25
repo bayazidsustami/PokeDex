@@ -6,15 +6,14 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
+import com.example.pokedex.R
 import com.example.pokedex.data.datasource.local.entity.PokemonDetailEntity
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.databinding.FragmentDetailBinding
-import com.example.pokedex.presentation.UiEvent
-import com.example.pokedex.presentation.getColorRes
-import com.example.pokedex.presentation.loadImage
-import com.example.pokedex.presentation.setColor
+import com.example.pokedex.presentation.*
 import com.example.pokedex.presentation.ui.base.BaseFragment
 import com.example.pokedex.presentation.viewmodel.DetailViewModel
+import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,6 +65,18 @@ class DetailPokemonFragment: BaseFragment<FragmentDetailBinding>(FragmentDetailB
     private fun renderUi(data: PokemonDetailEntity) {
         renderAttributes(data)
         renderStats(data)
+        renderTypes(data)
+    }
+
+    private fun renderTypes(data: PokemonDetailEntity) {
+        data.types.forEach {
+            val chips = Chip(requireContext())
+            chips.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            chips.setChipBackgroundColorResource(getColorFromDetailTypes(it.type.name))
+            chips.text = it.type.name
+            binding.containerTypes.setChipSpacing(requireContext().resources.getDimensionPixelSize(R.dimen.chips_spacing))
+            binding.containerTypes.addView(chips)
+        }
     }
 
     private fun renderAttributes(data: PokemonDetailEntity) {

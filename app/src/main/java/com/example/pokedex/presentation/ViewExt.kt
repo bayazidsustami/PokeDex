@@ -72,6 +72,24 @@ fun getColorRes(types: String) : Int {
     }
 }
 
+fun getColorFromDetailTypes(types: String) : Int {
+    return when(types) {
+        "grass" -> R.color.type_grass
+        "fire" -> R.color.type_fire
+        "water" -> R.color.type_water
+        "bug" -> R.color.type_bug
+        "electric" -> R.color.type_electric
+        "gosh" -> R.color.type_gosh
+        "normal" -> R.color.type_normal
+        "psychic" -> R.color.type_psychic
+        "steel"-> R.color.type_steel
+        "poison" -> R.color.type_poison
+        "rock" -> R.color.type_rock
+        "flying" -> R.color.type_flying
+        else -> R.color.type_grass
+    }
+}
+
 
 val listPokeColors: List<String>
     get() = listOf(

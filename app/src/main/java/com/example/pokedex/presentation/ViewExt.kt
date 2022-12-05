@@ -3,6 +3,7 @@ package com.example.pokedex.presentation
 import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
+import androidx.compose.ui.graphics.Color as ComposeColor
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -25,6 +26,14 @@ fun LinearProgressIndicator.setColor(types: String) {
     setIndicatorColor(Color.parseColor(colorHex(types)))
     trackColor = Color.parseColor(colorHex20Opacity(types))
     trackCornerRadius = 8
+}
+
+fun Int.toFormattedString(): String {
+    return String.format("#%03d", this)
+}
+
+fun getColor(color: String): ComposeColor {
+    return ComposeColor(Color.parseColor(color))
 }
 
 fun colorHex(types: String): String {

@@ -27,4 +27,5 @@
     <string name="weight_unit">%dKg</string>
     <string name="height_unit">%dm</string>
     <string name="evolutions">Evolutions</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

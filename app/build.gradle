@@ -18,6 +18,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
     }
 
     buildTypes {
@@ -69,6 +72,7 @@ dependencies {
     implementation libs.glide.compose
 
     implementation libs.hilt
+    implementation libs.hilt.compose
     kapt libs.hilt.compiler
     kapt libs.room.compiler
 

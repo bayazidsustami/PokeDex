@@ -1,6 +1,6 @@
 [versions]
 gradleplugin = "7.3.1"
-kotlin = "1.7.20"
+kotlin = "1.7.0"
 retrofit = "2.9.0"
 interceptor = "4.9.0"
 room = "2.4.3"
@@ -15,9 +15,11 @@ espresso-intents = "3.3.0"
 test-rules = "1.5.0"
 test-runner = "1.5.1"
 dagger-hilt = "2.44"
+hilt-compose = "1.0.0"
 activity-ktx = "1.6.1"
 fragment-ktx = "1.5.4"
-lifecycle-extensions = "2.5.1"
+lifecycle-extensions = "2.2.0"
+lifecycle-runtime = "2.5.1"
 glide = "4.14.2"
 glide-compose = "1.0.0-alpha.1"
 shimmer = "0.5.0"
@@ -46,10 +48,12 @@ espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version
 test-runner = { module = "androidx.test:runner", version.ref = "test-runner"}
 test-rules = { module = "androidx.test:rules", version.ref = "test-rules"}
 hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger-hilt" }
+hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-compose"}
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger-hilt" }
 activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
 fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref= "fragment-ktx" }
-lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref="lifecycle-extensions"}
+lifecycle-extensions = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "lifecycle-extensions" }
+lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle-runtime" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide"}
 glide-compose = { module = "com.github.bumptech.glide:compose", version.ref = "glide-compose" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
@@ -58,6 +62,7 @@ mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk"}
 coroutine-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutine-test"}
 arch-test = { module = "androidx.arch.core:core-testing", version.ref = "arch-test"}
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose-version"}
+compose-ui-material = { module = "androidx.compose.material:material", version.ref = "compose-version"}
 compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose-version" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose-version" }
 compose-ui-test = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose-version" }
@@ -66,14 +71,14 @@ compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", ve
 compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "compose-navigation" }
 compose-navigation-test = { module = "androidx.navigation:navigation-testing", version.ref = "compose-navigation" }
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity-ktx" }
-compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-extensions" }
+compose-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle-runtime" }
 
 [bundles]
 squareup = ["retrofit", "gson-converter", "interceptor"]
 room = ["room-ktx", "room-runtime"]
 standart = ["core-ktx", "appcompat", "material-design", "constraint-layout"]
-extensions = ["activity-ktx", "lifecycle-extensions", "fragment-ktx"]
-compose = ["compose-ui", "compose-ui-preview", "compose-icons", "compose-navigation", "compose-activity", "compose-viewmodel"]
+extensions = ["activity-ktx", "lifecycle-extensions", "lifecycle-runtime", "fragment-ktx"]
+compose = ["compose-ui", "compose-ui-preview","compose-ui-material", "compose-icons", "compose-navigation", "compose-activity", "compose-viewmodel"]
 compose-test = ["compose-ui-test", "compose-navigation-test"]
 compose-debug = ["compose-ui-tooling", "compose-ui-test-manifest"]
 unittest = ["junit", "mockk", "coroutine-test", "arch-test"]

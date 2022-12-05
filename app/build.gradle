@@ -42,10 +42,17 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.2.0'
     }
 
     packagingOptions {
-        resources.excludes.add("META-INF/*")
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
     }
 }
 
@@ -55,9 +62,11 @@ dependencies {
     implementation libs.bundles.squareup
     implementation libs.bundles.extensions
     implementation libs.bundles.room
+    implementation libs.bundles.compose
 
     implementation libs.shimmer
     implementation libs.glide
+    implementation libs.glide.compose
 
     implementation libs.hilt
     kapt libs.hilt.compiler
@@ -65,4 +74,6 @@ dependencies {
 
     testImplementation libs.bundles.unittest
     androidTestImplementation libs.bundles.instrumentationtest
+    androidTestImplementation libs.bundles.compose.test
+    debugImplementation libs.bundles.compose.debug
 }

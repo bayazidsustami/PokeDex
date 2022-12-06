@@ -1,7 +1,5 @@
 package com.example.pokedex.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.common.PokeSort
@@ -23,26 +21,20 @@ class HomeViewModel @Inject constructor(
     @MainDispatcher private val dispatcher: CoroutineDispatcher
 ) : ViewModel() {
 
-    private val _pokeList = MutableLiveData<UiEvent<List<PokemonEntity>>>()
-    val pokeList: LiveData<UiEvent<List<PokemonEntity>>> get() = _pokeList
-
-    private val _pokeListState = MutableStateFlow<UiEvent<List<PokemonEntity>>>(UiEvent.Loading)
-    val pokeListState: StateFlow<UiEvent<List<PokemonEntity>>> get() = _pokeListState
+    private val _pokeList = MutableStateFlow<UiEvent<List<PokemonEntity>>>(UiEvent.Loading)
+    val pokeList: StateFlow<UiEvent<List<PokemonEntity>>> get() = _pokeList
 
     fun getPokemonList(name: String = "", sortBy: PokeSort = PokeSort.NUMBER) {
         viewModelScope.launch(dispatcher) {
             homeUseCase.getListPokemon(name, sortBy).collect {
                 when(it) {
                     is Resource.Loading -> {
-                        _pokeListState.value = UiEvent.Loading
                         _pokeList.value = UiEvent.Loading
                     }
                     is Resource.Success -> {
-                        _pokeListState.value = UiEvent.Success(it.data)
                         _pokeList.value = UiEvent.Success(it.data)
                     }
                     is Resource.Error -> {
-                        _pokeListState.value = UiEvent.Error(it.message, it.errorCode)
                         _pokeList.value = UiEvent.Error(it.message, it.errorCode)
                     }
                 }

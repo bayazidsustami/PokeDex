@@ -4,9 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.pokedex.databinding.ActivityDetailBinding
-import com.example.pokedex.presentation.UiEvent
 import com.example.pokedex.presentation.gone
-import com.example.pokedex.presentation.ui.adapter.SectionAdapter
 import com.example.pokedex.presentation.ui.base.BaseActivity
 import com.example.pokedex.presentation.viewmodel.HomeViewModel
 import com.example.pokedex.presentation.visible
@@ -25,15 +23,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>(ActivityDetailBinding
         viewModel.getPokemonList()
 
         val position = intent.getIntExtra(EXTRA_POSITION, 0)
-
-        viewModel.pokeList.observe(this) {
-            if (it is UiEvent.Success) {
-                val adapter = SectionAdapter(this, it.data)
-                lastPosition = it.data.size - 1
-                binding.vpDetails.adapter = adapter
-                binding.vpDetails.currentItem = position
-            }
-        }
 
         binding.vpDetails.registerOnPageChangeCallback(pageChangeCallback)
 

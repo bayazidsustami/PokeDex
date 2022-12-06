@@ -53,7 +53,7 @@ fun HomeScreen(
     val focusRequester by remember { mutableStateOf(FocusRequester.Default) }
     val focusManager = LocalFocusManager.current
 
-    viewModel.pokeListState.collectAsState(initial = UiEvent.Loading).value.let { uiEvent ->
+    viewModel.pokeList.collectAsState(initial = UiEvent.Loading).value.let { uiEvent ->
         when (uiEvent) {
             is UiEvent.Loading -> {
                 viewModel.getPokemonList()

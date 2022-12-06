@@ -9,7 +9,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.pokedex.presentation.ui.screen.HomeScreen
+import com.example.pokedex.presentation.ui.PokeDexApp
 import com.example.pokedex.presentation.ui.theme.PokeDexTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    HomeScreen()
+                    PokeDexApp()
                 }
             }
         }
@@ -37,6 +37,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     PokeDexTheme {
-        HomeScreen()
+
     }
 }

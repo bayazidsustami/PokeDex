@@ -1,6 +1,5 @@
 package com.example.pokedex.presentation.ui.screen
 
-import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,7 +35,6 @@ import com.example.pokedex.R
 import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.presentation.UiEvent
 import com.example.pokedex.presentation.colorHex
-import com.example.pokedex.presentation.ui.activity.DetailActivity
 import com.example.pokedex.presentation.ui.components.PokeItem
 import com.example.pokedex.presentation.ui.components.SearchTextField
 import com.example.pokedex.presentation.ui.theme.Background
@@ -46,14 +43,15 @@ import com.example.pokedex.presentation.viewmodel.HomeViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+    onItemClicked: (PokemonEntity) -> Unit
 ) {
 
     var queryPoke by remember { mutableStateOf("") }
     var isFocus by remember { mutableStateOf(false) }
     val focusRequester by remember { mutableStateOf(FocusRequester.Default) }
     val focusManager = LocalFocusManager.current
-    val context = LocalContext.current
 
     viewModel.pokeListState.collectAsState(initial = UiEvent.Loading).value.let { uiEvent ->
         when (uiEvent) {
@@ -62,6 +60,7 @@ fun HomeScreen(
             }
             is UiEvent.Success -> {
                 HomeContent(
+                    modifier = modifier,
                     listPoke = uiEvent.data,
                     queryPoke = queryPoke,
                     isFocus = isFocus,
@@ -81,12 +80,7 @@ fun HomeScreen(
                         focusManager.clearFocus()
                         viewModel.getPokemonList()
                     },
-                    onItemClicked = {
-                        val intent = Intent(context, DetailActivity::class.java).also {
-                            it.putExtra(DetailActivity.EXTRA_POSITION, it)
-                        }
-                        context.startActivity(intent)
-                    }
+                    onItemClicked = onItemClicked
                 )
             }
             is UiEvent.Error -> {}
@@ -193,6 +187,6 @@ fun HomeListPoke(
 @Composable
 fun HomeScreenPreview() {
     PokeDexTheme {
-        HomeScreen()
+        HomeScreen(onItemClicked = {})
     }
 }

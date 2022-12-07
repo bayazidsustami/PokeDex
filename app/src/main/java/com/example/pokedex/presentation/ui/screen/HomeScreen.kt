@@ -70,9 +70,11 @@ fun HomeScreen(
         },
         onCleared = {
             isFocus = false
+            if (queryPoke.isNotEmpty()) {
+                viewModel.getPokemonList()
+            }
             queryPoke = ""
             focusManager.clearFocus()
-            viewModel.getPokemonList()
         },
         onItemClicked = onItemClicked,
         viewModel = viewModel

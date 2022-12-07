@@ -174,9 +174,8 @@ fun HomeListPoke(
                 pokeNumber = item.pokeNumber,
                 imageUrl = item.imageUrl,
                 itemColor = colorHex(item.colorTypes),
-                modifier = Modifier.clickable {
-                    onItemClicked(item)
-                }
+                modifier = Modifier
+                    .clickable { onItemClicked(item) }
             )
         }
     }

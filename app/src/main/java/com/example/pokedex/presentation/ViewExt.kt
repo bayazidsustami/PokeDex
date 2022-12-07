@@ -6,6 +6,18 @@ import android.widget.ImageView
 import androidx.compose.ui.graphics.Color as ComposeColor
 import com.bumptech.glide.Glide
 import com.example.pokedex.R
+import com.example.pokedex.presentation.ui.theme.TypeBug
+import com.example.pokedex.presentation.ui.theme.TypeElectric
+import com.example.pokedex.presentation.ui.theme.TypeFire
+import com.example.pokedex.presentation.ui.theme.TypeFlying
+import com.example.pokedex.presentation.ui.theme.TypeGosh
+import com.example.pokedex.presentation.ui.theme.TypeGrass
+import com.example.pokedex.presentation.ui.theme.TypeNormal
+import com.example.pokedex.presentation.ui.theme.TypePoison
+import com.example.pokedex.presentation.ui.theme.TypePsychic
+import com.example.pokedex.presentation.ui.theme.TypeRock
+import com.example.pokedex.presentation.ui.theme.TypeSteel
+import com.example.pokedex.presentation.ui.theme.TypeWater
 import com.google.android.material.progressindicator.LinearProgressIndicator
 
 fun ImageView.loadImage(url: String) {
@@ -96,6 +108,24 @@ fun getColorFromDetailTypes(types: String) : Int {
         "rock" -> R.color.type_rock
         "flying" -> R.color.type_flying
         else -> R.color.type_grass
+    }
+}
+
+fun getColorFromTypes(types: String) : ComposeColor {
+    return when(types) {
+        "grass" -> TypeGrass
+        "fire" -> TypeFire
+        "water" -> TypeWater
+        "bug" -> TypeBug
+        "electric" -> TypeElectric
+        "gosh" -> TypeGosh
+        "normal" -> TypeNormal
+        "psychic" -> TypePsychic
+        "steel"-> TypeSteel
+        "poison" -> TypePoison
+        "rock" -> TypeRock
+        "flying" -> TypeFlying
+        else -> TypeGrass
     }
 }
 

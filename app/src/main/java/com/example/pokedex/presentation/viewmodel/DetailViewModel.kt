@@ -1,7 +1,5 @@
 package com.example.pokedex.presentation.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokedex.common.Resource
@@ -12,6 +10,8 @@ import com.example.pokedex.domain.PokemonDetailUseCase
 import com.example.pokedex.presentation.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,11 +21,11 @@ class DetailViewModel @Inject constructor(
     @MainDispatcher private val dispatcher: CoroutineDispatcher
 ): ViewModel() {
 
-    private val _pokemonDetail = MutableLiveData<UiEvent<PokemonDetailEntity>>()
-    val pokemonDetail: LiveData<UiEvent<PokemonDetailEntity>> get() = _pokemonDetail
+    private val _pokemonEvolutions = MutableStateFlow<UiEvent<List<PokemonEntity>>>(UiEvent.Loading)
+    val pokemonEvolution: StateFlow<UiEvent<List<PokemonEntity>>> get() = _pokemonEvolutions
 
-    private val _pokemonEvolutions = MutableLiveData<UiEvent<List<PokemonEntity>>>()
-    val pokemonEvolution: LiveData<UiEvent<List<PokemonEntity>>> get() = _pokemonEvolutions
+    private val _pokemonDetail = MutableStateFlow<UiEvent<PokemonDetailEntity>>(UiEvent.Loading)
+    val pokemonDetail: StateFlow<UiEvent<PokemonDetailEntity>> get() = _pokemonDetail
 
     fun fetchDetails(id: String) {
         viewModelScope.launch(dispatcher) {

@@ -36,8 +36,7 @@ fun PokeItem(
 ) {
     Card(
         modifier = modifier
-            .size(104.dp, 112.dp)
-            .clickable {  },
+            .size(104.dp, 112.dp),
         shape = Shapes.medium,
         border = BorderStroke(1.dp, getColor(itemColor))
     ) {

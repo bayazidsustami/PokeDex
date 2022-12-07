@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -53,39 +54,29 @@ fun HomeScreen(
     val focusRequester by remember { mutableStateOf(FocusRequester.Default) }
     val focusManager = LocalFocusManager.current
 
-    viewModel.pokeList.collectAsState(initial = UiEvent.Loading).value.let { uiEvent ->
-        when (uiEvent) {
-            is UiEvent.Loading -> {
-                viewModel.getPokemonList()
+    HomeContent(
+        modifier = modifier,
+        queryPoke = queryPoke,
+        isFocus = isFocus,
+        focusRequester = focusRequester,
+        onFocusChanged = {
+            if (isFocus != it.isFocused) {
+                isFocus = it.isFocused
             }
-            is UiEvent.Success -> {
-                HomeContent(
-                    modifier = modifier,
-                    listPoke = uiEvent.data,
-                    queryPoke = queryPoke,
-                    isFocus = isFocus,
-                    focusRequester = focusRequester,
-                    onFocusChanged = {
-                        if (isFocus != it.isFocused) {
-                            isFocus = it.isFocused
-                        }
-                    },
-                    onValueChanged = {
-                        queryPoke = it
-                        viewModel.getPokemonList(it)
-                    },
-                    onCleared = {
-                        isFocus = false
-                        queryPoke = ""
-                        focusManager.clearFocus()
-                        viewModel.getPokemonList()
-                    },
-                    onItemClicked = onItemClicked
-                )
-            }
-            is UiEvent.Error -> {}
-        }
-    }
+        },
+        onValueChanged = {
+            queryPoke = it
+            viewModel.getPokemonList(it)
+        },
+        onCleared = {
+            isFocus = false
+            queryPoke = ""
+            focusManager.clearFocus()
+            viewModel.getPokemonList()
+        },
+        onItemClicked = onItemClicked,
+        viewModel = viewModel
+    )
 }
 
 @Composable
@@ -94,11 +85,11 @@ fun HomeContent(
     queryPoke: String,
     focusRequester: FocusRequester,
     isFocus: Boolean,
-    listPoke: List<PokemonEntity>,
     onValueChanged: (String) -> Unit,
     onCleared: () -> Unit,
     onFocusChanged: (FocusState) -> Unit,
     onItemClicked: (PokemonEntity) -> Unit,
+    viewModel: HomeViewModel,
 ) {
 
     Column(
@@ -117,7 +108,18 @@ fun HomeContent(
             onValueChange = onValueChanged,
             onCleared = onCleared
         )
-        HomeListPoke(listPoke, onItemClicked = onItemClicked)
+
+        viewModel.pokeList.collectAsState(initial = UiEvent.Loading).value.let { uiEvent ->
+            when (uiEvent) {
+                is UiEvent.Loading -> {
+                    viewModel.getPokemonList()
+                }
+                is UiEvent.Success -> {
+                    HomeListPoke(uiEvent.data, onItemClicked = onItemClicked)
+                }
+                is UiEvent.Error -> {}
+            }
+        }
     }
 }
 
@@ -162,11 +164,11 @@ fun HomeListPoke(
     onItemClicked: (PokemonEntity) -> Unit
 ) {
     LazyVerticalGrid(
-        modifier = modifier
-            .padding(16.dp),
+        modifier = modifier,
         columns = GridCells.Fixed(3),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(16.dp)
     ) {
         items(listPoke, key = { it.pokeNumber }) { item ->
             PokeItem(

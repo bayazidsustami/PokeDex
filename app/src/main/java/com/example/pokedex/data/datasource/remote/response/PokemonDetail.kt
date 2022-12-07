@@ -1,7 +1,6 @@
 package com.example.pokedex.data.datasource.remote.response
 
 import com.google.gson.annotations.SerializedName
-import kotlin.random.Random
 
 data class PokemonDetail(
     @SerializedName( "id")

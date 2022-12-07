@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">PokeDex</string>
-    <string name="poke_ball_icon">Poke Ball Icon</string>
-    <string name="poke_dex_title">Poke Dex Title</string>
     <string name="et_search_hint">Search by name</string>
-    <string name="pokemon">Pokemon</string>
-    <string name="back_button">Back Button</string>
     <string name="about">About</string>
     <string name="weight">Weight</string>
     <string name="height">Height</string>
@@ -16,8 +12,5 @@
     <string name="satk">SATK</string>
     <string name="sdef">SDEF</string>
     <string name="spd">SPD</string>
-    <string name="arrow_left">arrow_left</string>
-    <string name="arrow_right">arrow_right</string>
-    <string name="evolutions">Evolutions</string>
     <string name="title_activity_main">MainActivity</string>
 </resources>

@@ -15,7 +15,10 @@ import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Icon
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -138,7 +141,8 @@ fun HomeTopBar(
     ) {
         Row(
             modifier = Modifier
-                .padding(start = 16.dp),
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -150,10 +154,17 @@ fun HomeTopBar(
             Image(
                 painter = painterResource(R.drawable.poke_dex),
                 contentDescription = null,
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
-                    .size(width = 132.dp, height = 32.dp)
-                    .padding(start = 16.dp)
+                    .size(150.dp, 32.dp)
+                    .weight(1f)
+                    .padding(start = 16.dp, end = 16.dp)
+            )
+            Icon(
+                imageVector = Icons.Default.AccountCircle,
+                contentDescription = "about_page",
+                modifier = Modifier
+                    .size(32.dp)
             )
         }
     }
@@ -190,6 +201,6 @@ fun HomeListPoke(
 @Composable
 fun HomeScreenPreview() {
     PokeDexTheme {
-        HomeScreen(onItemClicked = {})
+       HomeTopBar()
     }
 }

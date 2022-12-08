@@ -5,4 +5,5 @@ sealed class Screen(val route: String) {
     object Detail: Screen("detail/{pokemonEntity}"){
         fun createRoute(arg: String) = "detail/$arg"
     }
+    object Profile: Screen("profile")
 }

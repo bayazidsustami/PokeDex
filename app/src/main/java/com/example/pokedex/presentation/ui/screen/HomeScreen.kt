@@ -49,7 +49,8 @@ import com.example.pokedex.presentation.viewmodel.HomeViewModel
 fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-    onItemClicked: (PokemonEntity) -> Unit
+    onItemClicked: (PokemonEntity) -> Unit,
+    onNavigateProfile: () -> Unit
 ) {
 
     var queryPoke by remember { mutableStateOf("") }
@@ -80,7 +81,8 @@ fun HomeScreen(
             focusManager.clearFocus()
         },
         onItemClicked = onItemClicked,
-        viewModel = viewModel
+        viewModel = viewModel,
+        onNavigateProfile = onNavigateProfile
     )
 }
 
@@ -95,13 +97,14 @@ fun HomeContent(
     onFocusChanged: (FocusState) -> Unit,
     onItemClicked: (PokemonEntity) -> Unit,
     viewModel: HomeViewModel,
+    onNavigateProfile: () -> Unit,
 ) {
 
     Column(
         modifier = modifier
             .background(color = Background)
     ) {
-        HomeTopBar()
+        HomeTopBar(onNavigateProfile = onNavigateProfile)
         SearchTextField(
             modifier = Modifier
                 .fillMaxWidth()
@@ -130,7 +133,8 @@ fun HomeContent(
 
 @Composable
 fun HomeTopBar(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onNavigateProfile: () -> Unit,
 ) {
     TopAppBar(
         modifier = modifier
@@ -165,6 +169,7 @@ fun HomeTopBar(
                 contentDescription = "about_page",
                 modifier = Modifier
                     .size(32.dp)
+                    .clickable { onNavigateProfile() }
             )
         }
     }
@@ -201,6 +206,6 @@ fun HomeListPoke(
 @Composable
 fun HomeScreenPreview() {
     PokeDexTheme {
-       HomeTopBar()
+       HomeTopBar(onNavigateProfile = {})
     }
 }

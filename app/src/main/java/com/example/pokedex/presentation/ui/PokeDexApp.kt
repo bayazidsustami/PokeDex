@@ -15,6 +15,7 @@ import com.example.pokedex.data.datasource.local.entity.PokemonEntity
 import com.example.pokedex.presentation.ui.navigation.Screen
 import com.example.pokedex.presentation.ui.screen.DetailScreen
 import com.example.pokedex.presentation.ui.screen.HomeScreen
+import com.example.pokedex.presentation.ui.screen.ProfileScreen
 import com.google.gson.Gson
 
 @Composable
@@ -36,6 +37,9 @@ fun PokeDexApp(
                         val pokeEntityJson = Uri.encode(Gson().toJson(pokeEntity))
                         navController.navigate(Screen.Detail.createRoute(pokeEntityJson))
                     },
+                    onNavigateProfile = {
+                        navController.navigate(Screen.Profile.route)
+                    }
                 )
             }
             composable(
@@ -53,6 +57,13 @@ fun PokeDexApp(
                     pokeNumber = pokemonEntity?.pokeNumber ?: "",
                     pokeImage = pokemonEntity?.imageUrl ?: "",
                     pokemonName = pokemonEntity?.pokeName ?: ""
+                )
+            }
+            composable(Screen.Profile.route){
+                ProfileScreen(
+                    onNavigateBack = {
+                        navController.navigateUp()
+                    }
                 )
             }
         }

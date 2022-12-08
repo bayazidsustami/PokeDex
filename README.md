@@ -21,5 +21,8 @@
 - Mockk
 - Espresso
 
+## Jetpack Compose
+I had also create jetpack compose on `pokedex_jetpack_compose` branch, please checkout to the branch if you desire to see jetpack compose version. It's should be note that the jetpack compose version still on progress and have a bit different ui.
+
 # Download
 you can find the apk on [release page](https://github.com/bayazidsustami/PokeDex/releases/tag/v1.0.0)

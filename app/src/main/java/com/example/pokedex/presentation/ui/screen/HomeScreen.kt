@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.layout.ContentScale
@@ -41,8 +42,10 @@ import com.example.pokedex.presentation.UiEvent
 import com.example.pokedex.presentation.colorHex
 import com.example.pokedex.presentation.ui.components.PokeItem
 import com.example.pokedex.presentation.ui.components.SearchTextField
+import com.example.pokedex.presentation.ui.components.ShimmerComponent
 import com.example.pokedex.presentation.ui.theme.Background
 import com.example.pokedex.presentation.ui.theme.PokeDexTheme
+import com.example.pokedex.presentation.ui.theme.Shapes
 import com.example.pokedex.presentation.viewmodel.HomeViewModel
 
 @Composable
@@ -121,6 +124,7 @@ fun HomeContent(
             when (uiEvent) {
                 is UiEvent.Loading -> {
                     viewModel.getPokemonList()
+                    ShimmerHomeLoading()
                 }
                 is UiEvent.Success -> {
                     HomeListPoke(uiEvent.data, onItemClicked = onItemClicked)
@@ -201,11 +205,31 @@ fun HomeListPoke(
     }
 }
 
+@Composable
+fun ShimmerHomeLoading(
+    modifier: Modifier = Modifier
+) {
+    LazyVerticalGrid(
+        modifier = modifier
+            .padding(16.dp),
+        columns = GridCells.Fixed(3),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ){
+        items(15){
+            ShimmerComponent(
+                modifier = Modifier
+                    .size(104.dp, 112.dp)
+                    .clip(Shapes.medium)
+            )
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
     PokeDexTheme {
-       HomeTopBar(onNavigateProfile = {})
+       ShimmerHomeLoading()
     }
 }

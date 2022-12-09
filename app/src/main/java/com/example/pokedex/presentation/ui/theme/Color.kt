@@ -22,3 +22,9 @@ val TypeSteel = Color(0xFFB7B9D0)
 val TypePoison = Color(0xFFA43E9E)
 val TypeRock = Color(0xFFB69E31)
 val TypeFlying = Color(0xFFA891EC)
+
+val ShimmerColorShades = listOf(
+    Color.LightGray.copy(0.9f),
+    Color.LightGray.copy(0.2f),
+    Color.LightGray.copy(0.9f)
+)

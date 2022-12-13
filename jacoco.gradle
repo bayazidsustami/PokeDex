@@ -131,6 +131,6 @@ def createVariantCoverage(variant) {
                 "$project.projectDir/src/main/kotlin",
                 "$project.projectDir/src/${variantName}/kotlin"
         ]))
-        getExecutionData().setFrom(files("${project.buildDir}/outputs/unit_test_code_coverage/${variantName}UnitTest/${testTaskName}.exec"))
+        getExecutionData().setFrom(files("${project.buildDir}/jacoco/${testTaskName}.exec"))
     }
 }

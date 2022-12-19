@@ -65,8 +65,9 @@ ext.excludes = [
 ]
 
 ext.includes = [
-        '**/*ViewModel.*',
-        '**/*RepositoryImpl.*',
+        '**/*ViewModel*.*',
+        '**/*RepositoryImpl*.*',
+        '**/*UseCaseImpl*.*',
 ]
 def createVariantCoverage(variant) {
     def variantName = variant.name

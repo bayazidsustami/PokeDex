@@ -13,7 +13,10 @@ import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -39,7 +42,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `fetch list pokemon should be show loading`() = coroutineRule.runBlockingTest {
+    fun `fetch list pokemon should be show loading`() {
         val expected = flow<Resource<List<PokemonEntity>>> { emit(Resource.Loading) }
 
         coEvery { homeUseCase.getListPokemon(any(), any()) } returns expected
@@ -55,7 +58,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `fetch list pokemon should be success and return data`() = coroutineRule.runBlockingTest {
+    fun `fetch list pokemon should be success and return data`() {
         val items = listOf(
             PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
             PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
@@ -70,7 +73,7 @@ class HomeViewModelTest {
 
         coEvery { homeUseCase.getListPokemon(any(), any()) } returns expected
 
-        viewModel.getPokemonList("", PokeSort.NUMBER)
+        viewModel.getPokemonList("bulba", PokeSort.DESC)
 
         val actual = viewModel.pokeList.value
         assertNotNull(actual)
@@ -88,7 +91,41 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `fetch list pokemon should be failed and throw an error`() = coroutineRule.runBlockingTest {
+    fun `fetch list pokemon with default args should be success and return data`() {
+        val items = listOf(
+            PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
+            PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
+            PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
+            PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
+            PokemonEntity("#001", "bulbasurus", "https://exapmple.com", "https://exapmple.com", "type_grass"),
+        )
+
+        val expected = flow {
+            emit(Resource.Success(items))
+        }
+
+        coEvery { homeUseCase.getListPokemon(any(), any()) } returns expected
+
+        viewModel.getPokemonList()
+
+        val actual = viewModel.pokeList.value
+        assertNotNull(actual)
+        assertTrue(actual is UiEvent.Success)
+        assertFalse(actual is UiEvent.Error)
+        val data = (actual as UiEvent.Success).data
+        assertEquals(items.size, data.size)
+        assertEquals(items[0].pokeName, data[0].pokeName)
+        assertEquals(items[0].pokeNumber, data[0].pokeNumber)
+        assertEquals(items[0].imageUrl, data[0].imageUrl)
+        assertEquals(items[0].url, data[0].url)
+        assertEquals(items[0].colorTypes, data[0].colorTypes)
+
+        coVerify { homeUseCase.getListPokemon(any(), any()) }
+    }
+
+
+    @Test
+    fun `fetch list pokemon should be failed and throw an error`() {
         val error = Resource.Error("failed to fetch", 404)
         val expected = flow<Resource<List<PokemonEntity>>> {
             emit(error)

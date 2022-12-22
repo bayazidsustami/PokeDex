@@ -99,6 +99,7 @@ def createVariantCoverage(variant) {
         doLast {
             def m = new File("${project.buildDir}/reports/jacoco/${testTaskName}Coverage/html/index.html")
                     .text =~ /Total[^%]*>(\d?\d?\d?%)/
+            println "${project.buildDir}/reports/jacoco/${testTaskName}Coverage/${testTaskName}Coverage.xml"
             if (m) {
                 println "Test coverage: ${m[0][1]}"
             }

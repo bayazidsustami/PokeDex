@@ -2,8 +2,10 @@ name: Run Unit Test
 
 on:
 
-  push:
-    branches: [ pokedex_jetpack_compose ]
+  pull_request:
+    branches:
+      - 'pokedex_jetpack_compose'
+    types: [opened, synchronize, push]
 
 jobs:
 

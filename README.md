@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/github/bayazidsustami/PokeDex/branch/main/graph/badge.svg?token=BY21VQCAUX)](https://codecov.io/github/bayazidsustami/PokeDex)
+![Unit Test](https://github.com/bayazidsustami/PokeDex/actions/workflows/unittest_coverage.yml/badge.svg)
 # PokeDex
 ## Prerequisite
 - Java 11

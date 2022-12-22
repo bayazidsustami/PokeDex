@@ -12,7 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Set Up JDK 11
         uses: actions/setup-java@v1
         with:
@@ -23,14 +22,20 @@ jobs:
 
       - name: Run UnitTestCoverage debug
         id: tests
-        run: ./gradlew testDebugUnitTestCoverage
+        run: ./gradlew clean testDebugUnitTestCoverage
+
+      - uses: actions/checkout@master
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ${{ github.workspace }}/app/build/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          verbose: true
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
         with:
           name: unit_test_report
           path: app/build/reports/jacoco/testDebugUnitTestCoverage/html/index.html
-
-      - name: Build with Gradle
-        id: build
-        run: ./gradlew assembleDebug

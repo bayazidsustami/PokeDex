@@ -80,6 +80,7 @@ def createVariantCoverage(variant) {
 
         reports {
             html.enabled = true
+            xml.enabled= true
         }
 
         def javaClasses = fileTree(dir: "${buildDir}/intermediates/classes/${variantName}", includes: project.includes)

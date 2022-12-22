@@ -24,7 +24,6 @@ jobs:
         id: tests
         run: ./gradlew clean testDebugUnitTestCoverage
 
-      - uses: actions/checkout@master
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

@@ -26,6 +26,15 @@ jobs:
         id: tests
         run: ./gradlew clean testDebugUnitTestCoverage
 
+      - name: Add coverage to PR
+        id: jacoco
+        uses: madrapps/jacoco-report@v1.3
+        with:
+          paths: ${{ github.workspace }}/app/build/reports/jacoco/testDebugUnitTestCoverage/testDebugUnitTestCoverage.xml
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          min-coverage-overall: 40
+          min-coverage-changed-files: 60
+
       - uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

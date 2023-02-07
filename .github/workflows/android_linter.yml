@@ -1,0 +1,40 @@
+name: Android Linter
+
+on:
+  pull_request:
+    branches: [ pokedex_jetpack_compose ]
+    types: [opened, reopened, synchronize]
+    paths:
+      - .github/workflows/android_linter.yml
+      - '*/src/**'
+      - gradle/**
+      - '**.gradle'
+      - gradle.properties
+      - gradlew*
+
+jobs:
+  android-lint:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          cache: gradle
+      - run: ./gradlew lint
+      - name: Lint results
+        uses: actions/upload-artifact@v1
+        with:
+          name: linter-result
+          path: ${{ github.workspace }}/app/build/reports/lint-results-debug.html
+      - name: Run Code Analysis
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: ${{ github.workspace }}/app/build/reports/lint-results-debug.sarif
+          category: lint

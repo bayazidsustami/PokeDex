@@ -1,0 +1,49 @@
+name: Android Linter
+
+on:
+  pull_request:
+    branches: [ pokedex_jetpack_compose ]
+    types: [opened, reopened, synchronize]
+    paths:
+      - .github/workflows/android_linter.yml
+      - '*/src/**'
+      - gradle/**
+      - '**.gradle'
+      - gradle.properties
+      - gradlew*
+
+jobs:
+  android-danger:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          cache: gradle
+      - run: ./gradlew lint
+      - name: Lint results
+        uses: actions/upload-artifact@v1
+        with:
+          name: linter-result
+          path: ${{ github.workspace }}/app/build/reports/lint-results-debug.html
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.1'
+          bundler-cache: true
+      - name: Run Danger
+        if: github.event_name  == 'pull_request'
+        run: |
+          # install danger and its dependencies using bundler
+          gem install danger
+          # execute danger for this PR
+          bundle exec danger --dangerfile=Dangerfile --danger_id=danger-pr
+        env:
+          # the token used by danger to report the results on the PR
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

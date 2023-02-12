@@ -10,3 +10,5 @@ gem 'danger-checkstyle_format'
 gem 'danger-android_lint'
 # Add-on to process detekt result files
 gem 'danger-kotlin_detekt'
+#To use retry middleware with Faraday v2.0+, install `faraday-retry` gem
+gem 'faraday-retry'

@@ -61,8 +61,7 @@ ext.excludes = [
         '**/*Adapter*.*',
         '**/*View*.*',
         '**/*ViewState*.*',
-        '**/*ViewHolder*.*',
-        '**/*RepositoryImpl*.*',
+        '**/*ViewHolder*.*'
 ]
 
 ext.includes = [
